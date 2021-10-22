@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"noEmit": false,
+		"target": "es6",
+		"module": "esnext",
+		"noImplicitAny": false,
+		"preserveConstEnums": true,
+		"baseUrl": "./app",
+		"jsx": "react",
+		"lib": ["dom", "es5", "es6", "es7", "es2017"],
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"declaration": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": false,
+		"strict": true,
+		"strictFunctionTypes": false,
+		"pretty": true,
+		"removeComments": true
+	},
+	"exclude": ["node_modules", "webpack"]
+}
