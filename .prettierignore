@@ -1,0 +1,7 @@
+# node modules
+/node_modules/
+
+# compiled files
+.next/
+build/
+dist/
