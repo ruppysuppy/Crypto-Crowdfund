@@ -7,9 +7,5 @@ const mount = (mountPoint: HTMLElement) => {
   ReactDOM.render(<App />, mountPoint);
 };
 
-const authMountPoint = document.getElementById('_auth-dev-root')!;
-if (process.env.NODE_ENV === 'development' && authMountPoint) {
-  mount(authMountPoint);
-}
-
-export { mount };
+const mountPoint = document.getElementById('root')!;
+mount(mountPoint);

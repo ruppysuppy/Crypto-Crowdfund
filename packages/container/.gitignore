@@ -4,7 +4,3 @@
 # lock files
 yarn.lock
 package-lock.json
-
-# next files
-.next/
-next-env.d.ts
