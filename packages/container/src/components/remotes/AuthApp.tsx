@@ -7,7 +7,7 @@ const AuthApp = () => {
 
   useEffect(() => {
     if (ref.current) {
-      mount(ref.current);
+      mount(ref.current, {});
     }
   }, []);
 
