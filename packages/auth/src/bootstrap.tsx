@@ -10,10 +10,14 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
+interface IOnNavigateProps {
+  pathname: string;
+}
+
 interface IMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
-  onNavigate?: () => void;
+  onNavigate?: (props: IOnNavigateProps) => void;
 }
 
 const mount = (

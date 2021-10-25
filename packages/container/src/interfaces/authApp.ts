@@ -1,9 +1,13 @@
 import { History, MemoryHistory } from 'history';
 
+interface IOnNavigateProps {
+  pathname: string;
+}
+
 interface IAuthMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
-  onNavigate?: () => void;
+  onNavigate?: (props: IOnNavigateProps) => void;
 }
 
 export { IAuthMountOptions };
