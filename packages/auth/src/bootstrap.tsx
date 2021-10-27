@@ -34,6 +34,15 @@ const mount = (
   }
 
   ReactDOM.render(<App history={history} />, mountPoint);
+
+  return {
+    onParentNavigate: ({ pathname: nextPathname }) => {
+      const { pathname } = history.location;
+      if (nextPathname !== pathname) {
+        history.push(nextPathname);
+      }
+    },
+  };
 };
 
 const authMountPoint = document.getElementById('_auth-dev-root')!;

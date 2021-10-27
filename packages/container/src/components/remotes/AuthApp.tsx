@@ -9,7 +9,7 @@ const AuthApp = () => {
 
   useEffect(() => {
     if (ref.current) {
-      mount(ref.current, {
+      const { onParentNavigate } = mount(ref.current, {
         onNavigate: ({ pathname: nextPathname }) => {
           if (nextPathname !== history.location.pathname) {
             history.push(nextPathname);
@@ -17,6 +17,8 @@ const AuthApp = () => {
         },
         initialPath: history.location.pathname,
       });
+
+      history.listen(onParentNavigate);
     }
   }, []);
 

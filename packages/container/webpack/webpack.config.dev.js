@@ -12,6 +12,31 @@ const devConfig = {
     port: 3000,
     historyApiFallback: true,
   },
+  module: {
+    rules: [
+      {
+        test: /\.module.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+    ],
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'container',

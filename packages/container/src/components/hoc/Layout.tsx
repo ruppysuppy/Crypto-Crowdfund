@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Navbar from '../ui/Navbar';
+
 interface IProps {
   children: React.ReactNode;
 }
@@ -7,9 +9,9 @@ interface IProps {
 const Layout = ({ children }: IProps) => {
   return (
     <>
-      <h1>Header</h1>
-      {children}
-      <h1>Footer</h1>
+      <Navbar />
+      <main>{children}</main>
+      <span>Footer</span>
     </>
   );
 };

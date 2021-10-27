@@ -8,21 +8,21 @@
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  color: var(--color-primary-dark);
+  color: var(--color-primary-dark) !important;
+  border: 1px solid var(--color-primary-dark) !important;
   background-color: transparent;
-  border: 1px solid var(--color-primary-dark);
   box-sizing: border-box;
   transition: var(--transition) ease-in-out;
 }
 
 .root:hover {
-  color: var(--color-background);
-  border: 1px solid var(--color-primary-light);
+  color: var(--color-background) !important;
+  border: 1px solid var(--color-primary-light) !important;
   background-color: var(--color-primary-light);
 }
 
 .root:focus {
-  border: 1px solid var(--color-primary-light);
-  color: var(--color-primary-light);
+  color: var(--color-primary-light) !important;
+  border: 1px solid var(--color-primary-light) !important;
   background-color: transparent;
 }
