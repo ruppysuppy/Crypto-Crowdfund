@@ -37,7 +37,9 @@ const mount = (
 };
 
 const authMountPoint = document.getElementById('_auth-dev-root')!;
-if (process.env.NODE_ENV === 'development' && authMountPoint) {
+const isStandAlone = process.env.NODE_ENV === 'development' && authMountPoint;
+
+if (isStandAlone) {
   mount(authMountPoint, {
     defaultHistory: createBrowserHistory(),
   });

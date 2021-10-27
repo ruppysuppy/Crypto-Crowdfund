@@ -1,57 +1,78 @@
-import { Button, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useSharedStyles } from '../../../shared/theme';
+import Button from '../../ui/Button/Button';
+import Input from '../../ui/Input/Input';
+import { emailRegex } from '../../../shared/regex';
+
+import classes from '../../../common.module.css';
+import sharedClasses from '../../../common.module.css';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const sharedClasses = useSharedStyles();
+  const validate = () => {
+    setEmailError('');
+    setPasswordError('');
+    let isValid = true;
+
+    if (!email) {
+      setEmailError('Email is required');
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      setEmailError('Email is invalid');
+      isValid = false;
+    }
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    }
+    return isValid;
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
   };
 
   return (
-    <div>
-      <Typography variant="h4" className={sharedClasses.primaryText}>
-        Sign In
-      </Typography>
-      <br />
+    <section>
+      <h1 className={classes.h1}>Sign In</h1>
 
       <form onSubmit={handleSubmit}>
-        <TextField
+        <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          variant="outlined"
-          label="Email"
+          placeholder="Email"
           type="email"
+          error={!!emailError}
+          helperText={emailError}
           autoFocus
-          fullWidth
+          fullwidth
         />
-        <br /> <br />
-        <TextField
+        <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          variant="outlined"
-          label="Password"
+          placeholder="Password"
           type="password"
-          fullWidth
+          error={!!passwordError}
+          helperText={passwordError}
+          fullwidth
         />
-        <br /> <br />
-        <Typography variant="body2">
+        <p className={classes.p}>
           Not a member yet?{' '}
           <Link to="/signup" className={sharedClasses.link}>
             Sign up
           </Link>
-        </Typography>
-        <br />
-        <Button variant="outlined" type="submit">
-          Sign In
-        </Button>
+        </p>
+        <Button type="submit">Sign In</Button>
       </form>
-    </div>
+    </section>
   );
 }

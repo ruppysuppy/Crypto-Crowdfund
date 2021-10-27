@@ -1,0 +1,87 @@
+.input {
+  display: block;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid var(--color-primary-dark);
+  color: var(--color-primary);
+  border-radius: 0.35rem;
+  padding: 0.75rem;
+  transition: var(--transition) ease-in-out;
+  margin: 0.5rem 0;
+}
+
+.input::placeholder {
+  color: var(--color-primary-dark);
+  transition: var(--transition) ease-in-out;
+}
+
+.input:focus,
+.input:hover {
+  border: 1px solid var(--color-primary-light);
+  color: var(--color-primary-light);
+}
+
+.input:focus::placeholder,
+.input:hover::placeholder {
+  color: var(--color-primary-light);
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.error {
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.input.error::placeholder,
+.input.error::placeholder {
+  color: var(--color-error);
+}
+
+.input.error:focus,
+.input.error:hover {
+  border: 1px solid var(--color-error-dark);
+  color: var(--color-error-dark);
+}
+
+.input.error:focus::placeholder,
+.input.error:hover::placeholder {
+  color: var(--color-error-dark);
+}
+
+.helperText {
+  color: var(--color-primary);
+  margin-left: 0.5rem;
+}
+
+.helperTextError {
+  color: var(--color-error);
+}
+
+@media screen and (min-width: 568px) {
+  .input {
+    margin: 0.75rem 0;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .input {
+    margin: 1rem 0;
+  }
+
+  .helperText {
+    margin-left: 0.75rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .input {
+    margin: 1.5rem 0;
+  }
+
+  .helperText {
+    margin-left: 1.25rem;
+  }
+}

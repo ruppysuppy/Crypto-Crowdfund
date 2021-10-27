@@ -1,0 +1,28 @@
+.root {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-primary-dark);
+  background-color: transparent;
+  border: 1px solid var(--color-primary-dark);
+  box-sizing: border-box;
+  transition: var(--transition) ease-in-out;
+}
+
+.root:hover {
+  color: var(--color-background);
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--color-primary-light);
+}
+
+.root:focus {
+  border: 1px solid var(--color-primary-light);
+  color: var(--color-primary-light);
+  background-color: transparent;
+}

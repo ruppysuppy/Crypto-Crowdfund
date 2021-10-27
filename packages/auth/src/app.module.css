@@ -1,0 +1,19 @@
+.authRoot {
+  --color-primary: #eeeeee;
+  --color-secondary: #808080;
+  --color-primary-dark: #dddddd;
+  --color-primary-light: #ffffff;
+  --color-background: #111111;
+  --color-paper: #222222;
+  --color-error: #df3939;
+  --color-error-dark: #c52727;
+
+  --spacing: 4px;
+
+  --transition: 0.15s;
+}
+
+.authRoot * {
+  font-family: 'Roboto', sans-serif;
+  outline: none !important;
+}
