@@ -21,6 +21,7 @@ interface IMountOptions {
   routes: {
     SIGN_IN: string;
     SIGN_UP: string;
+    FAQ: string;
   };
 }
 
@@ -58,6 +59,7 @@ if (isStandAlone) {
     routes: {
       SIGN_IN: '/sign-in',
       SIGN_UP: '/sign-up',
+      FAQ: '/faq',
     },
   });
 }
