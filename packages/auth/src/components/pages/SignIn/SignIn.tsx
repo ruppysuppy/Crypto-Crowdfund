@@ -8,7 +8,14 @@ import { emailRegex } from '../../../shared/regex';
 import classes from '../../../common.module.css';
 import sharedClasses from '../../../common.module.css';
 
-export default function SignIn() {
+interface IProps {
+  routes: {
+    SIGN_IN: string;
+    SIGN_UP: string;
+  };
+}
+
+export default function SignIn({ routes }: IProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -67,7 +74,7 @@ export default function SignIn() {
         />
         <p className={classes.p}>
           Not a member yet?{' '}
-          <Link to="/signup" className={sharedClasses.link}>
+          <Link to={routes.SIGN_UP} className={sharedClasses.link}>
             Sign up
           </Link>
         </p>

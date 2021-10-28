@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 
 import { mount } from 'auth/Auth';
+import routes from '../../shared/routes';
 
 const AuthApp = () => {
   const ref = useRef(null);
@@ -16,6 +17,10 @@ const AuthApp = () => {
           }
         },
         initialPath: history.location.pathname,
+        routes: {
+          SIGN_IN: routes.SIGN_IN,
+          SIGN_UP: routes.SIGN_UP,
+        },
       });
 
       history.listen(onParentNavigate);

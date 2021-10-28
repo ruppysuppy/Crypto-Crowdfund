@@ -51,21 +51,18 @@
 }
 
 .faceBook:active,
-.faceBook:focus,
 .faceBook:hover {
   background-color: #3b5998;
   filter: drop-shadow(0 0 8px #3b5998);
 }
 
 .twitter:active,
-.twitter:focus,
 .twitter:hover {
   background-color: #00acee;
   filter: drop-shadow(0 0 8px #00acee);
 }
 
 .instagram:active,
-.instagram:focus,
 .instagram:hover {
   background: -webkit-linear-gradient(
     225deg,
@@ -78,7 +75,6 @@
 }
 
 .youtube:active,
-.youtube:focus,
 .youtube:hover {
   background-color: #ff0000;
   filter: drop-shadow(0 0 8px #ff0000);

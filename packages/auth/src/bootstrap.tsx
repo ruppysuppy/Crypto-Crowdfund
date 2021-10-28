@@ -18,22 +18,26 @@ interface IMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
   onNavigate?: (props: IOnNavigateProps) => void;
+  routes: {
+    SIGN_IN: string;
+    SIGN_UP: string;
+  };
 }
 
 const mount = (
   mountPoint: HTMLElement,
-  { defaultHistory, initialPath, onNavigate }: IMountOptions,
+  { defaultHistory, initialPath, onNavigate, routes }: IMountOptions,
 ) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
-      initialEntries: initialPath ? [initialPath] : ['/signin'],
+      initialEntries: initialPath ? [initialPath] : ['/sign-in'],
     });
   if (onNavigate) {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, mountPoint);
+  ReactDOM.render(<App history={history} routes={routes} />, mountPoint);
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {
@@ -51,6 +55,10 @@ const isStandAlone = process.env.NODE_ENV === 'development' && authMountPoint;
 if (isStandAlone) {
   mount(authMountPoint, {
     defaultHistory: createBrowserHistory(),
+    routes: {
+      SIGN_IN: '/sign-in',
+      SIGN_UP: '/sign-up',
+    },
   });
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Navlink from './Navlink/Navlink';
+import routes from '../../../shared/routes';
 
 import classes from './navbar.module.css';
 import logo from '../../../assets/logo.svg';
@@ -22,8 +23,8 @@ export default function Navbar({ isAuthenticated }: IProps) {
           isAuthenticated && classes.threeByThree
         }`}
       >
-        <Navlink to="/campaigns">Campaigns</Navlink>
-        <Navlink to="/signin">Sign In</Navlink>
+        <Navlink to={routes.CAMPAIGNS}>Campaigns</Navlink>
+        <Navlink to={routes.SIGN_IN}>Sign In</Navlink>
       </div>
     </nav>
   );

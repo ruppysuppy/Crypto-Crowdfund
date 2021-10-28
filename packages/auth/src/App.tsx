@@ -11,19 +11,23 @@ import classes from './app.module.css';
 
 interface IProps {
   history: History | MemoryHistory;
+  routes: {
+    SIGN_IN: string;
+    SIGN_UP: string;
+  };
 }
 
-export default function App({ history }: IProps) {
+export default function App({ history, routes }: IProps) {
   return (
     <div className={classes.authRoot}>
       <Router history={history}>
         <Layout>
           <Switch>
-            <Route exact path="/signin">
-              <SignIn />
+            <Route exact path={routes.SIGN_IN}>
+              <SignIn routes={routes} />
             </Route>
-            <Route exact path="/signup">
-              <SignUp />
+            <Route exact path={routes.SIGN_UP}>
+              <SignUp routes={routes} />
             </Route>
           </Switch>
         </Layout>
