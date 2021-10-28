@@ -7,7 +7,7 @@ body {
 #root {
   height: 100vh;
   width: 100vw;
-  overflow: auto;
+  overflow: hidden;
 }
 
 * {
@@ -22,6 +22,7 @@ body {
   --color-primary-light: #ffffff;
   --color-background: #111111;
   --color-paper: #222222;
+  --color-paper-light: #404040;
   --color-error: #df3939;
   --color-error-dark: #c52727;
 

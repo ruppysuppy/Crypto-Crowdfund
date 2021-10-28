@@ -1,0 +1,42 @@
+.containerRoot {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.body {
+  flex: 1;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.body::-webkit-scrollbar {
+  width: calc(var(--spacing) * 0.5);
+}
+
+.body::-webkit-scrollbar-track {
+  background: var(--color-paper-light);
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  transition: var(--transition) ease-in-out;
+}
+
+.body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+@media screen and (min-width: 992px) {
+  .body::-webkit-scrollbar {
+    width: var(--spacing);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .body::-webkit-scrollbar {
+    width: calc(var(--spacing) * 2);
+  }
+}

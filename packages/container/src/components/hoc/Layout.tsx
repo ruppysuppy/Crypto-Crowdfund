@@ -1,6 +1,9 @@
 import React from 'react';
 
-import Navbar from '../ui/Navbar';
+import Footer from '../ui/Footer/Footer';
+import Navbar from '../ui/Navbar/Navbar';
+
+import classes from './layout.module.css';
 
 interface IProps {
   children: React.ReactNode;
@@ -8,11 +11,13 @@ interface IProps {
 
 const Layout = ({ children }: IProps) => {
   return (
-    <>
+    <div className={classes.containerRoot}>
       <Navbar />
-      <main>{children}</main>
-      <span>Footer</span>
-    </>
+      <div className={classes.body}>
+        <main>{children}</main>
+        <Footer />
+      </div>
+    </div>
   );
 };
 
