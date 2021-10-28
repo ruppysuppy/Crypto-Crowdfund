@@ -7,6 +7,7 @@ interface IAuthMountOptions {
   routes: {
     SIGN_IN: string;
     SIGN_UP: string;
+    FAQ: string;
   };
 }
 

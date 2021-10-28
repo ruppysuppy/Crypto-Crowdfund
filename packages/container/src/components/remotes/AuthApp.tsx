@@ -20,6 +20,7 @@ const AuthApp = () => {
         routes: {
           SIGN_IN: routes.SIGN_IN,
           SIGN_UP: routes.SIGN_UP,
+          FAQ: routes.FAQ,
         },
       });
 

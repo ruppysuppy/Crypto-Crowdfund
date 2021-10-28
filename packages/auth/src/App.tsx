@@ -14,6 +14,7 @@ interface IProps {
   routes: {
     SIGN_IN: string;
     SIGN_UP: string;
+    FAQ: string;
   };
 }
 
@@ -21,7 +22,7 @@ export default function App({ history, routes }: IProps) {
   return (
     <div className={classes.authRoot}>
       <Router history={history}>
-        <Layout>
+        <Layout faqLink={routes.FAQ}>
           <Switch>
             <Route exact path={routes.SIGN_IN}>
               <SignIn routes={routes} />

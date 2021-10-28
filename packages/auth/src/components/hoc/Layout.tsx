@@ -6,9 +6,10 @@ import sharedClasses from '../../common.module.css';
 
 interface IProps {
   children: React.ReactNode;
+  faqLink: string;
 }
 
-export default function Layout({ children }: IProps) {
+export default function Layout({ children, faqLink }: IProps) {
   return (
     <div className={classes.root}>
       {children}
@@ -20,7 +21,7 @@ export default function Layout({ children }: IProps) {
         <p className={sharedClasses.p}>
           All actions modifying the BlockChain incurs the use of gas, which
           costs a small amount of Ether. For details, click{' '}
-          <Link to="/about" className={sharedClasses.link}>
+          <Link to={faqLink} className={sharedClasses.link}>
             here
           </Link>
         </p>
