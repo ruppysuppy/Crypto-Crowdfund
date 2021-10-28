@@ -21,17 +21,11 @@ const devConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
               importLoaders: 1,
             },
-          },
-        ],
-      },
-      {
-        test: /\.(png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
           },
         ],
       },
