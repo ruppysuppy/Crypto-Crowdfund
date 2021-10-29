@@ -1,0 +1,84 @@
+.accordianRoot {
+  margin: calc(var(--spacing) * 2) 0;
+}
+
+.accordion {
+  background-color: var(--color-paper);
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  padding: calc(var(--spacing) * 4);
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition) ease-in-out;
+}
+
+.accordion span {
+  text-align: left;
+}
+
+.accordion i {
+  padding: 0 calc(var(--spacing) * 2);
+  transition: var(--transition) ease-in-out;
+}
+
+.active button,
+.accordion:hover,
+.accordion:focus {
+  color: var(--color-primary-light);
+  background-color: var(--color-paper-dark);
+}
+
+.active button {
+  background-color: var(--color-paper-light) !important;
+}
+
+.active i {
+  transform: rotate(180deg);
+}
+
+.panel {
+  padding: 0 calc(var(--spacing) * 4);
+  background-color: var(--color-paper);
+  max-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.active .panel {
+  padding: calc(var(--spacing) * 4);
+  max-height: max-content;
+}
+
+@media screen and (min-width: 992px) {
+  .accordianRoot {
+    margin: calc(var(--spacing) * 4) 0;
+  }
+
+  .accordion,
+  .active .panel {
+    padding: calc(var(--spacing) * 6);
+  }
+
+  .panel {
+    padding: 0 calc(var(--spacing) * 6);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .accordianRoot {
+    margin: calc(var(--spacing) * 8) 0;
+  }
+
+  .accordion,
+  .active .panel {
+    padding: calc(var(--spacing) * 8);
+  }
+
+  .panel {
+    padding: 0 calc(var(--spacing) * 8);
+  }
+}

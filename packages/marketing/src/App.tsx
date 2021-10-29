@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 
 import About from './components/pages/About/About';
+import FAQ from './components/pages/FAQ/FAQ';
 import Home from './components/pages/Home/Home';
 import Layout from './components/hoc/Layout';
 
@@ -34,6 +35,9 @@ export default function App({ history, routes }: IProps) {
             </Route>
             <Route exact path={routes.ABOUT}>
               <About />
+            </Route>
+            <Route exact path={routes.FAQ}>
+              <FAQ />
             </Route>
           </Switch>
         </Router>

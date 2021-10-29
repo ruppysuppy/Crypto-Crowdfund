@@ -5,6 +5,8 @@
   --color-primary-light: #ffffff;
   --color-background: #111111;
   --color-paper: #222222;
+  --color-paper-dark: #202020;
+  --color-paper-light: #404040;
   --color-error: #df3939;
   --color-error-dark: #c52727;
 
@@ -13,7 +15,7 @@
   --transition: 0.15s;
 }
 
-.marketingRoot * {
+.marketingRoot *:not(i) {
   font-family: 'Roboto', sans-serif;
   outline: none !important;
 }
