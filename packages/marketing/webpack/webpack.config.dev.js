@@ -6,10 +6,10 @@ const packageJson = require('../package.json');
 const devConfig = {
   mode: 'development',
   output: {
-    publicPath: 'http://localhost:3000/',
+    publicPath: 'http://localhost:8002/',
   },
   devServer: {
-    port: 3000,
+    port: 8002,
     historyApiFallback: true,
   },
   module: {
@@ -33,10 +33,10 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'container',
-      remotes: {
-        auth: 'auth@http://localhost:8001/remoteEntry.js',
-        marketing: 'marketing@http://localhost:8002/remoteEntry.js',
+      name: 'marketing',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Marketing': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),

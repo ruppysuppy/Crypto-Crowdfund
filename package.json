@@ -7,7 +7,8 @@
     "run-auth": "cd packages/auth && yarn dev",
     "run-blockchain": "cd packages/blockchain && yarn dev",
     "run-marketing": "cd packages/marketing && yarn dev",
-    "prettier": "prettier --write . --config .prettierrc.json"
+    "prettier": "prettier --write . --config .prettierrc.json",
+    "install": "cd packages/auth && yarn && cd ../container && yarn && cd ../marketing && yarn"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
