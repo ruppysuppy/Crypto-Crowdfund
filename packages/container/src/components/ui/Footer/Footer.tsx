@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import routes from '../../../shared/routes';
+
 import classes from './footer.module.css';
 import sharedClasses from '../../../common.module.css';
 
@@ -11,13 +13,13 @@ export default function Footer() {
 
       <div className={classes.linkHolder}>
         <Link
-          to="/about"
+          to={routes.ABOUT}
           className={`${sharedClasses.p} ${sharedClasses.link} ${classes.link}`}
         >
           About
         </Link>
         <Link
-          to="/faq"
+          to={routes.FAQ}
           className={`${sharedClasses.p} ${sharedClasses.link} ${classes.link}`}
         >
           FAQ
@@ -38,19 +40,19 @@ export default function Footer() {
 
       <div className={classes.linkHolder}>
         <Link
-          to="/terms"
+          to={routes.TERMS_AND_CONDITIONS}
           className={`${sharedClasses.p} ${sharedClasses.link} ${classes.link}`}
         >
           Terms & Conditions
         </Link>
         <Link
-          to="/privacy"
+          to={routes.PRIVACY_POLICY}
           className={`${sharedClasses.p} ${sharedClasses.link} ${classes.link}`}
         >
           Privacy
         </Link>
         <Link
-          to="/disclaimer"
+          to={routes.DISCLAIMER}
           className={`${sharedClasses.p} ${sharedClasses.link} ${classes.link}`}
         >
           Disclaimer
@@ -62,7 +64,7 @@ export default function Footer() {
   const Social = (
     <section className={classes.social}>
       <a
-        className={`${classes.socialMediaBtn} ${classes.faceBook}`}
+        className={`${classes.socialMediaBtn} ${classes.faceBook} ${sharedClasses.h2}`}
         href="https://www.facebook.com/"
         target="_blank"
         rel="noopener noreferrer"
@@ -70,7 +72,7 @@ export default function Footer() {
         <i className="fab fa-facebook" aria-hidden="true" />
       </a>
       <a
-        className={`${classes.socialMediaBtn} ${classes.twitter}`}
+        className={`${classes.socialMediaBtn} ${classes.twitter} ${sharedClasses.h2}`}
         href="https://twitter.com/"
         target="_blank"
         rel="noopener noreferrer"
@@ -78,7 +80,7 @@ export default function Footer() {
         <i className="fab fa-twitter" aria-hidden="true" />
       </a>
       <a
-        className={`${classes.socialMediaBtn} ${classes.instagram}`}
+        className={`${classes.socialMediaBtn} ${classes.instagram} ${sharedClasses.h2}`}
         href="https://www.instagram.com/"
         target="_blank"
         rel="noopener noreferrer"
@@ -86,7 +88,7 @@ export default function Footer() {
         <i className="fab fa-instagram" aria-hidden="true" />
       </a>
       <a
-        className={`${classes.socialMediaBtn} ${classes.youtube}`}
+        className={`${classes.socialMediaBtn} ${classes.youtube} ${sharedClasses.h2}`}
         href="https://www.youtube.com/"
         target="_blank"
         rel="noopener noreferrer"
@@ -99,7 +101,7 @@ export default function Footer() {
   const Copyright = (
     <section className={classes.copyright}>
       <p className={sharedClasses.p}>
-        COPYRIGHT © {new Date().getFullYear()} TAP FOODWORKS LTD. | ALL RIGHTS
+        COPYRIGHT © {new Date().getFullYear()} TAP COINS LTD. | ALL RIGHTS
         RESERVED
       </p>
     </section>

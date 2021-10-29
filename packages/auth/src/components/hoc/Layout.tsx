@@ -11,7 +11,7 @@ interface IProps {
 
 export default function Layout({ children, faqLink }: IProps) {
   return (
-    <div className={classes.root}>
+    <div className={classes.authLayoutRoot}>
       {children}
 
       <section>
