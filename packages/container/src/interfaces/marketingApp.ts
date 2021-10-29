@@ -11,6 +11,8 @@ interface IMarketingMountOptions {
     TERMS_AND_CONDITIONS: string;
     PRIVACY_POLICY: string;
     DISCLAIMER: string;
+    CAMPAIGNS: string;
+    SIGN_IN: string;
   };
 }
 

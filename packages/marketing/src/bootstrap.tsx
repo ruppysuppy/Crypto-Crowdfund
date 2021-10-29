@@ -25,6 +25,8 @@ interface IMountOptions {
     TERMS_AND_CONDITIONS: string;
     PRIVACY_POLICY: string;
     DISCLAIMER: string;
+    CAMPAIGNS: string;
+    SIGN_IN: string;
   };
 }
 
@@ -66,6 +68,8 @@ if (isStandAlone) {
       TERMS_AND_CONDITIONS: '/terms-and-conditions',
       PRIVACY_POLICY: '/privacy-policy',
       DISCLAIMER: '/disclaimer',
+      CAMPAIGNS: '/campaigns',
+      SIGN_IN: '/sign-in',
     },
   });
 }

@@ -24,6 +24,8 @@ const AuthApp = () => {
           TERMS_AND_CONDITIONS: routes.TERMS_AND_CONDITIONS,
           PRIVACY_POLICY: routes.PRIVACY_POLICY,
           DISCLAIMER: routes.DISCLAIMER,
+          CAMPAIGNS: routes.CAMPAIGNS,
+          SIGN_IN: routes.SIGN_IN,
         },
       });
 

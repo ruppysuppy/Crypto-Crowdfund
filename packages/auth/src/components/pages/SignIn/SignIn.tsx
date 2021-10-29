@@ -10,7 +10,6 @@ import sharedClasses from '../../../common.module.css';
 
 interface IProps {
   routes: {
-    SIGN_IN: string;
     SIGN_UP: string;
   };
 }
