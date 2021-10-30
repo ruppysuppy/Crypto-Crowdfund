@@ -15,7 +15,7 @@ export default function Navbar({ isAuthenticated }: IProps) {
   return (
     <nav className={classes.nav}>
       <Link to="/" className={classes.logo}>
-        <img src={logo} />
+        <img src={logo} alt="crypto-crowdfund" />
       </Link>
 
       <div
