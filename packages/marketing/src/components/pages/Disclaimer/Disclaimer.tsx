@@ -1,0 +1,127 @@
+import React from 'react';
+
+import sharedClasses from '../../../common.module.css';
+
+export default function Disclaimer() {
+  return (
+    <div>
+      <h1 className={sharedClasses.h1}>Disclaimer</h1>
+
+      <section>
+        <h2 className={sharedClasses.h2}>Disclaimer of Warranties</h2>
+
+        <p className={sharedClasses.p}>
+          You understand that we cannot and do not guarantee or warrant that
+          files available for downloading from the internet or the Website will
+          be free of viruses or other destructive code. You are responsible for
+          implementing sufficient procedures and checkpoints to satisfy your
+          particular requirements for anti-virus protection and accuracy of data
+          input and output, and for maintaining a means external to our site for
+          any reconstruction of any lost data. TO THE FULLEST EXTENT PROVIDED BY
+          LAW, WE WILL NOT BE LIABLE FOR ANY LOSS OR DAMAGE CAUSED BY A
+          DISTRIBUTED DENIAL-OF-SERVICE ATTACK, VIRUSES, OR OTHER
+          TECHNOLOGICALLY HARMFUL MATERIAL THAT MAY INFECT YOUR COMPUTER
+          EQUIPMENT, COMPUTER PROGRAMS, DATA, OR OTHER PROPRIETARY MATERIAL DUE
+          TO YOUR USE OF THE WEBSITE OR ANY SERVICES OR ITEMS OBTAINED THROUGH
+          THE WEBSITE OR TO YOUR DOWNLOADING OF ANY MATERIAL POSTED ON IT, OR ON
+          ANY WEBSITE LINKED TO IT.
+        </p>
+
+        <p className={sharedClasses.p}>
+          YOUR USE OF THE INTERNET, THE WEBSITE, ITS CONTENT, AND ANY SERVICES
+          OR ITEMS OBTAINED THROUGH THE WEBSITE IS AT YOUR OWN RISK. THE
+          WEBSITE, ITS CONTENT, AND ANY SERVICES OR ITEMS OBTAINED THROUGH THE
+          WEBSITE ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS, WITHOUT
+          ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. NEITHER THE
+          COMPANY NOR ANY PERSON ASSOCIATED WITH THE COMPANY MAKES ANY WARRANTY
+          OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY,
+          RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE WEBSITE.
+          WITHOUT LIMITING THE FOREGOING, NEITHER THE COMPANY NOR ANYONE
+          ASSOCIATED WITH THE COMPANY REPRESENTS OR WARRANTS THAT THE WEBSITE,
+          ITS CONTENT, OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE WEBSITE
+          WILL BE ACCURATE, RELIABLE, ERROR-FREE, OR UNINTERRUPTED, THAT DEFECTS
+          WILL BE CORRECTED, THAT OUR SITE OR THE SERVER THAT MAKES IT AVAILABLE
+          ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS, OR THAT THE WEBSITE
+          OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE WEBSITE WILL OTHERWISE
+          MEET YOUR NEEDS OR EXPECTATIONS.
+        </p>
+        <p className={sharedClasses.p}>
+          TO THE FULLEST EXTENT PROVIDED BY LAW, THE COMPANY HEREBY DISCLAIMS
+          ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY, OR
+          OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+          MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE.
+        </p>
+        <p className={sharedClasses.p}>
+          THE FOREGOING DOES NOT AFFECT ANY WARRANTIES THAT CANNOT BE EXCLUDED
+          OR LIMITED UNDER APPLICABLE LAW.
+        </p>
+      </section>
+
+      <section>
+        <h2 className={sharedClasses.h2}>Limitation on Liability</h2>
+
+        <p className={sharedClasses.p}>
+          TO THE FULLEST EXTENT PROVIDED BY LAW, IN NO EVENT WILL THE COMPANY,
+          ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES,
+          AGENTS, OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND,
+          UNDER ANY LEGAL OR EQUITABLE THEORY, ARISING OUT OF OR IN CONNECTION
+          WITH YOUR USE, OR INABILITY TO USE, THE WEBSITE, ANY WEBSITES LINKED
+          TO IT, ANY CONTENT ON THE WEBSITE OR SUCH OTHER WEBSITES, INCLUDING
+          ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE
+          DAMAGES, INCLUDING BUT NOT LIMITED TO, PERSONAL INJURY, PAIN AND
+          SUFFERING, EMOTIONAL DISTRESS, LOSS OF REVENUE, LOSS OF PROFITS, LOSS
+          OF BUSINESS OR ANTICIPATED SAVINGS, LOSS OF PROFIT, LOSS OF USE, LOSS
+          OF GOODWILL, LOSS OF DATA, AND WHETHER CAUSED BY TORT (INCLUDING
+          NEGLIGENCE), BREACH OF CONTRACT, OR OTHERWISE, EVEN IF FORESEEABLE.
+        </p>
+
+        <p className={sharedClasses.p}>
+          The limitation of liability set out above does not apply to liability
+          resulting from our gross negligence or willful misconduct.
+        </p>
+
+        <p className={sharedClasses.p}>
+          THE FOREGOING DOES NOT AFFECT ANY LIABILITY THAT CANNOT BE EXCLUDED OR
+          LIMITED UNDER APPLICABLE LAW.
+        </p>
+      </section>
+
+      <section>
+        <h2 className={sharedClasses.h2}>Reliance on Information Posted</h2>
+
+        <p className={sharedClasses.p}>
+          THE INFORMATION PRESENTED ON THE WEBSITE IS REPRESENTED TO US AS BEING
+          MATERIALLY TRUE, CORRECT AND COMPLETE. WHILE WE CONTINUALLY ENDEAVOR
+          TO PROVIDE REASONABLY AND MATERIALLY CORRECT INFORMATION REGARDING
+          CAMPAIGNS, CAMPAIGNERS AND BENEFICIARIES OF DONATIONS, WE DO NOT
+          WARRANT THAT THE INFORMATION PRESENT IS TRUE, CORRECT OR COMPLETE. ANY
+          RELIANCE YOU PLACE ON SUCH INFORMATION INVOLVES CERTAIN RISK. WE
+          DISCLAIM ALL LIABILITY AND RESPONSIBILITY ARISING FROM ANY RELIANCE
+          PLACED ON SUCH MATERIALS BY YOU OR ANY OTHER VISITOR TO THE WEBSITE,
+          OR BY ANYONE WHO MAY BE INFORMED OF ANY OF ITS CONTENTS.
+        </p>
+
+        <p className={sharedClasses.p}>
+          THIS WEBSITE CONTAINS IN LARGE MEASURE CONTENT PROVIDED BY THIRD
+          PARTIES, INCLUDING MATERIALS PROVIDED BY CAMPAIGNERS AND BENEFICIARIES
+          OF DONATIONS, OTHER USERS, BLOGGERS, AND THIRD-PARTY LICENSORS,
+          SYNDICATORS, AGGREGATORS, AND/OR REPORTING SERVICES. ALL STATEMENTS
+          AND/OR OPINIONS EXPRESSED IN THESE MATERIALS, AND ALL ARTICLES AND
+          RESPONSES TO QUESTIONS AND OTHER CONTENT, OTHER THAN THE CONTENT
+          PROVIDED BY THE COMPANY, ARE SOLELY THE OPINIONS AND THE
+          RESPONSIBILITY OF THE PERSON OR ENTITY PROVIDING THOSE MATERIALS.
+          THESE MATERIALS DO NOT NECESSARILY REFLECT THE OPINION OF THE COMPANY.
+          WE ARE NOT RESPONSIBLE, OR LIABLE TO YOU OR ANY THIRD PARTY, FOR THE
+          CONTENT OR ACCURACY OF ANY MATERIALS PROVIDED BY ANY THIRD PARTY.
+        </p>
+
+        <p className={sharedClasses.p}>
+          We update the content on this Website from time to time, but its
+          content is not necessarily always complete or up-to date. Any of the
+          material on the Website may be out of date at any given time, and we
+          are under no obligation to update such material.
+        </p>
+      </section>
+    </div>
+  );
+}

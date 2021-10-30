@@ -1,7 +1,8 @@
 import React from 'react';
 
-import sharedClasses from '../../../common.module.css';
 import Accordian from './Accordian/Accordian';
+
+import sharedClasses from '../../../common.module.css';
 
 export default function FAQ() {
   return (
