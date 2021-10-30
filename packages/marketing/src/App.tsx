@@ -7,6 +7,7 @@ import About from './components/pages/About/About';
 import FAQ from './components/pages/FAQ/FAQ';
 import Home from './components/pages/Home/Home';
 import Layout from './components/hoc/Layout';
+import TermsAndConditions from './components/pages/TermsAndConditions/TermsAndConditions';
 
 import classes from './app.module.css';
 
@@ -38,6 +39,9 @@ export default function App({ history, routes }: IProps) {
             </Route>
             <Route exact path={routes.FAQ}>
               <FAQ />
+            </Route>
+            <Route exact path={routes.TERMS_AND_CONDITIONS}>
+              <TermsAndConditions />
             </Route>
           </Switch>
         </Router>
