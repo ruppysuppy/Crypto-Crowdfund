@@ -8,10 +8,28 @@ module.exports = {
         exclude: /node_modules/,
         use: 'ts-loader',
       },
+      {
+        test: /\.(png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.ts', '.tsx', '.module.css'],
+    extensions: [
+      '',
+      '.js',
+      '.ts',
+      '.tsx',
+      '.module.css',
+      '.png',
+      '.jpg',
+      '.jpeg',
+      '.svg',
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({

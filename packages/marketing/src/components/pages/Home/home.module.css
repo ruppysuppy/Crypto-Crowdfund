@@ -1,0 +1,112 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: calc(var(--spacing) * 6) calc(var(--spacing) * 2);
+}
+
+.imgHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-2rem);
+}
+
+.img {
+  width: calc(var(--spacing) * 50);
+  height: calc(var(--spacing) * 50);
+  filter: drop-shadow(0 0 calc(var(--spacing) * 3) var(--color-primary));
+  animation: coin-hover calc(var(--transition) * 12) ease-in-out 0s infinite
+    alternate;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  direction: ltr;
+}
+
+.buttonHolder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: calc(var(--spacing) * 2);
+  width: max-content;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes coin-hover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4rem);
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .root {
+    padding: calc(var(--spacing) * 8) calc(var(--spacing) * 4);
+  }
+
+  .buttonHolder {
+    grid-gap: calc(var(--spacing) * 3);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .root {
+    padding: calc(var(--spacing) * 10) calc(var(--spacing) * 8);
+    grid-template-columns: 1fr 1fr;
+    direction: rtl;
+  }
+
+  .img {
+    width: calc(var(--spacing) * 64);
+    height: calc(var(--spacing) * 64);
+  }
+
+  .buttonHolder {
+    grid-gap: calc(var(--spacing) * 4);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .root {
+    padding: calc(var(--spacing) * 16) calc(var(--spacing) * 16);
+  }
+
+  .img {
+    width: calc(var(--spacing) * 72);
+    height: calc(var(--spacing) * 72);
+  }
+
+  .buttonHolder {
+    grid-gap: calc(var(--spacing) * 5);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .root {
+    padding: calc(var(--spacing) * 28) calc(var(--spacing) * 32);
+  }
+
+  .img {
+    width: calc(var(--spacing) * 96);
+    height: calc(var(--spacing) * 96);
+    filter: drop-shadow(0 0 calc(var(--spacing) * 6) var(--color-primary));
+  }
+
+  .buttonHolder {
+    grid-gap: calc(var(--spacing) * 6);
+  }
+}

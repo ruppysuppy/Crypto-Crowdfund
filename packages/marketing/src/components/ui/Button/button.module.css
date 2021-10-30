@@ -1,0 +1,28 @@
+.root {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-primary-dark) !important;
+  border: 1px solid var(--color-primary-dark) !important;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: var(--transition) ease-in-out;
+}
+
+.root:hover {
+  color: var(--color-background) !important;
+  border: 1px solid var(--color-primary-light) !important;
+  background-color: var(--color-primary-light);
+}
+
+.root:focus {
+  color: var(--color-primary-light) !important;
+  border: 1px solid var(--color-primary-light) !important;
+  background-color: transparent;
+}
