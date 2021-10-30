@@ -12,7 +12,7 @@ const prodConfig = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[hash:base64:5]',
+                localIdentName: 'co-[hash:base64:5]',
               },
               importLoaders: 1,
             },
