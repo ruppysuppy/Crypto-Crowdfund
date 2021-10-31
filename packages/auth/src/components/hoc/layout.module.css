@@ -5,7 +5,7 @@
   color: var(--color-secondary);
   box-sizing: border-box;
   min-height: calc(100vh - var(--spacing) * 8);
-  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 2);
+  padding: calc(var(--spacing) * 2);
 }
 
 @media screen and (min-width: 568px) {

@@ -2,7 +2,7 @@
   background-color: var(--color-paper);
   display: flex;
   align-items: center;
-  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 2);
+  padding: calc(var(--spacing) * 2);
   width: 100vw;
   height: max-content;
   box-sizing: border-box;

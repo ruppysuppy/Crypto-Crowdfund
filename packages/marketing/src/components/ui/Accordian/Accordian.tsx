@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import classes from './accordian.module.css';
-import sharedClasses from '../../../../common.module.css';
+import sharedClasses from '../../../common.module.css';
 
 interface IProps {
   title: string;

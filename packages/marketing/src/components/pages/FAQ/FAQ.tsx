@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Accordian from './Accordian/Accordian';
+import Accordian from '../../ui/Accordian/Accordian';
 
 import sharedClasses from '../../../common.module.css';
 
