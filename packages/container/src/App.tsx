@@ -1,7 +1,7 @@
 import { createBrowserHistory } from 'history';
 
 import React, { useState } from 'react';
-import { Route, Router, Switch } from 'react-router';
+import { Redirect, Route, Router, Switch } from 'react-router';
 
 import Layout from './components/hoc/Layout';
 import Error404 from './components/pages/Error404';
@@ -15,13 +15,15 @@ const history = createBrowserHistory();
 export default function App() {
   const [user, setUser] = useState<IUser | null>(null);
 
+  const redirect = <Redirect to={routes.CAMPAIGNS} />;
+
   const validRoutes = (
     <Switch>
       <Route exact path={routes.SIGN_IN}>
-        <AuthApp setUser={setUser} />
+        {user ? redirect : <AuthApp setUser={setUser} />}
       </Route>
       <Route exact path={routes.SIGN_UP}>
-        <AuthApp setUser={setUser} />
+        {user ? redirect : <AuthApp setUser={setUser} />}
       </Route>
       <Route exact path={routes.HOME}>
         <MarketingApp user={user} />
