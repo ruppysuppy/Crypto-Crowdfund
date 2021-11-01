@@ -29,23 +29,19 @@ export default function Home({ isAuthenticated, routes }: IProps) {
           campaigns. We help you to turn your creative ideas to reality.
         </p>
         <div className={classes.buttonHolder}>
-          <Button>
+          <Link
+            to={routes.CAMPAIGNS}
+            className={`${classes.link} ${sharedClasses.p}`}
+          >
+            <Button>View Campaigns</Button>
+          </Link>
+          {!isAuthenticated && (
             <Link
-              to={routes.CAMPAIGNS}
+              to={routes.SIGN_IN}
               className={`${classes.link} ${sharedClasses.p}`}
             >
-              View Campaigns
+              <Button>Sign In</Button>
             </Link>
-          </Button>
-          {!isAuthenticated && (
-            <Button>
-              <Link
-                to={routes.SIGN_IN}
-                className={`${classes.link} ${sharedClasses.p}`}
-              >
-                Sign In
-              </Link>
-            </Button>
           )}
         </div>
       </section>
