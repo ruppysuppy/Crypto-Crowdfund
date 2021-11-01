@@ -15,6 +15,7 @@ import classes from './app.module.css';
 
 interface IProps {
   history: History | MemoryHistory;
+  isAuthenticated?: boolean;
   routes: {
     HOME: string;
     ABOUT: string;
@@ -27,14 +28,14 @@ interface IProps {
   };
 }
 
-export default function App({ history, routes }: IProps) {
+export default function App({ history, isAuthenticated, routes }: IProps) {
   return (
     <div className={classes.marketingRoot}>
       <Layout>
         <Router history={history}>
           <Switch>
             <Route exact path={routes.HOME}>
-              <Home routes={routes} />
+              <Home routes={routes} isAuthenticated={isAuthenticated} />
             </Route>
             <Route exact path={routes.ABOUT}>
               <About />

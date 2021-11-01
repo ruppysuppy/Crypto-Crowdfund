@@ -1,20 +1,35 @@
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Button from '../../ui/Button/Button';
+import ErrorBanner from '../../ui/ErrorBanner/ErrorBanner';
 import Input from '../../ui/Input/Input';
+import Spinner from '../../ui/Spinner/Spinner';
 import { emailRegex } from '../../../shared/regex';
+import { IOnAuthStateChanged } from '../../../shared/authTypes';
 
 import classes from '../../../common.module.css';
 import sharedClasses from '../../../common.module.css';
 
 interface IProps {
+  auth: Auth;
   routes: {
+    CAMPAIGNS: string;
     SIGN_IN: string;
   };
+  onAuthStateChangedHandler?: IOnAuthStateChanged;
 }
 
-export default function SignIn({ routes }: IProps) {
+export default function SignIn({
+  auth,
+  routes,
+  onAuthStateChangedHandler,
+}: IProps) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,12 +38,16 @@ export default function SignIn({ routes }: IProps) {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const validate = () => {
     setEmailError('');
     setPasswordError('');
     setUsernameError('');
     setConfirmPasswordError('');
+    setError('');
     let isValid = true;
 
     if (!email) {
@@ -40,6 +59,9 @@ export default function SignIn({ routes }: IProps) {
     }
     if (!password) {
       setPasswordError('Password is required');
+      isValid = false;
+    } else if (password.length < 6) {
+      setPasswordError('Password must contain at least 6 characters');
       isValid = false;
     }
     if (!username) {
@@ -53,12 +75,30 @@ export default function SignIn({ routes }: IProps) {
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!validate()) {
       return;
     }
+
+    setIsLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser!, { displayName: username });
+      const user = auth.currentUser!;
+      onAuthStateChangedHandler &&
+        onAuthStateChangedHandler({
+          uid: user.uid,
+          photoURL: user.photoURL,
+          displayName: user.displayName,
+        });
+      history.push(routes.CAMPAIGNS);
+    } catch (error) {
+      // @ts-ignore
+      setError(error.code);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -103,13 +143,14 @@ export default function SignIn({ routes }: IProps) {
           helperText={confirmPasswordError}
           fullwidth
         />
+        {error && <ErrorBanner>{error}</ErrorBanner>}
         <p className={classes.p}>
           Already a member yet?{' '}
           <Link to={routes.SIGN_IN} className={sharedClasses.link}>
             Sign in
           </Link>
         </p>
-        <Button type="submit">Sign Up</Button>
+        {isLoading ? <Spinner /> : <Button type="submit">Sign Up</Button>}
       </form>
     </section>
   );

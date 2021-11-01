@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "firebase": "^9.2.0"
   }
 }

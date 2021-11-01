@@ -3,24 +3,28 @@ import { useHistory } from 'react-router';
 
 import { mount } from 'auth/Auth';
 import routes from '../../shared/routes';
+import { firebaseConfig } from '../../shared/firebase';
+import { IUser } from '../../interfaces/user';
 
-const AuthApp = () => {
+interface IProps {
+  setUser: (user: IUser | null) => void;
+}
+
+const AuthApp = ({ setUser }: IProps) => {
   const ref = useRef(null);
   const history = useHistory();
 
   useEffect(() => {
     if (ref.current) {
       const { onParentNavigate } = mount(ref.current, {
+        firebaseConfig: firebaseConfig,
+        initialPath: history.location.pathname,
+        routes: routes,
+        onAuthStateChangedHandler: setUser,
         onNavigate: ({ pathname: nextPathname }) => {
           if (nextPathname !== history.location.pathname) {
             history.push(nextPathname);
           }
-        },
-        initialPath: history.location.pathname,
-        routes: {
-          SIGN_IN: routes.SIGN_IN,
-          SIGN_UP: routes.SIGN_UP,
-          FAQ: routes.FAQ,
         },
       });
 

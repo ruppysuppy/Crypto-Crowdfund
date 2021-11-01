@@ -17,7 +17,7 @@ interface IOnNavigateProps {
 interface IMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
-  onNavigate?: (props: IOnNavigateProps) => void;
+  isAuthenticated?: boolean;
   routes: {
     HOME: string;
     ABOUT: string;
@@ -28,11 +28,18 @@ interface IMountOptions {
     CAMPAIGNS: string;
     SIGN_IN: string;
   };
+  onNavigate?: (props: IOnNavigateProps) => void;
 }
 
 const mount = (
   mountPoint: HTMLElement,
-  { defaultHistory, initialPath, onNavigate, routes }: IMountOptions,
+  {
+    defaultHistory,
+    initialPath,
+    isAuthenticated,
+    routes,
+    onNavigate,
+  }: IMountOptions,
 ) => {
   const history =
     defaultHistory ||
@@ -43,7 +50,10 @@ const mount = (
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} routes={routes} />, mountPoint);
+  ReactDOM.render(
+    <App history={history} routes={routes} isAuthenticated={isAuthenticated} />,
+    mountPoint,
+  );
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {

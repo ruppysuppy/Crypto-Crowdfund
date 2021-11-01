@@ -3,7 +3,7 @@ import { History, MemoryHistory } from 'history';
 interface IMarketingMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
-  onNavigate?: (props: { pathname: string }) => void;
+  isAuthenticated?: boolean;
   routes: {
     HOME: string;
     ABOUT: string;
@@ -14,6 +14,7 @@ interface IMarketingMountOptions {
     CAMPAIGNS: string;
     SIGN_IN: string;
   };
+  onNavigate?: (props: { pathname: string }) => void;
 }
 
 export { IMarketingMountOptions };

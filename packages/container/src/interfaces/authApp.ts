@@ -1,14 +1,29 @@
 import { History, MemoryHistory } from 'history';
 
+type IOnAuthStateChanged = (
+  user: {
+    uid: string;
+    displayName: string | null;
+    photoURL: string | null;
+  } | null,
+) => void;
+
 interface IAuthMountOptions {
   defaultHistory?: History | MemoryHistory;
   initialPath?: string;
-  onNavigate?: (props: { pathname: string }) => void;
+  firebaseConfig: {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+    appId: string;
+  };
   routes: {
     SIGN_IN: string;
     SIGN_UP: string;
     FAQ: string;
   };
+  onAuthStateChangedHandler?: IOnAuthStateChanged;
+  onNavigate?: (props: { pathname: string }) => void;
 }
 
-export { IAuthMountOptions };
+export { IAuthMountOptions, IOnAuthStateChanged };

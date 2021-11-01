@@ -1,0 +1,19 @@
+.banner {
+  background-color: var(--color-error-light);
+  color: var(--color-error-dark);
+  border-radius: 0.5rem;
+  padding: calc(var(--spacing) * 2);
+}
+
+@media screen and (min-width: 992px) {
+  .banner {
+    padding: calc(var(--spacing) * 3);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .banner {
+    padding: calc(var(--spacing) * 4);
+    border-radius: 0.75rem;
+  }
+}
