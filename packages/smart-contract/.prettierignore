@@ -1,0 +1,6 @@
+# node modules
+/node_modules/
+
+# compiled files
+build/
+dist/
