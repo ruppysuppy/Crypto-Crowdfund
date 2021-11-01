@@ -4,3 +4,6 @@
 # lock files
 yarn.lock
 package-lock.json
+
+# enviroment files
+.env
