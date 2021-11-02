@@ -1,6 +1,7 @@
 import { createBrowserHistory } from 'history';
 
-import React, { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Router, Switch } from 'react-router';
 
 import Layout from './components/hoc/Layout';
@@ -9,11 +10,16 @@ import AuthApp from './components/remotes/AuthApp';
 import MarketingApp from './components/remotes/MarketingApp';
 import routes from './shared/routes';
 import { IUser } from './interfaces/user';
+import { auth } from './shared/firebase';
 
 const history = createBrowserHistory();
 
 export default function App() {
   const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => setUser(user || null));
+  }, []);
 
   const redirect = <Redirect to={routes.CAMPAIGNS} />;
 
@@ -51,7 +57,7 @@ export default function App() {
 
   return (
     <Router history={history}>
-      <Layout>{validRoutes}</Layout>
+      <Layout user={user}>{validRoutes}</Layout>
     </Router>
   );
 }

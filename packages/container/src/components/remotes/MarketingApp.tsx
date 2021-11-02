@@ -37,7 +37,7 @@ const AuthApp = ({ user }: IProps) => {
 
       history.listen(onParentNavigate);
     }
-  }, []);
+  }, [user]);
 
   return <div ref={ref} />;
 };
