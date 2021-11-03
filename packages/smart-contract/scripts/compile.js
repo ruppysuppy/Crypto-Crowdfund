@@ -3,7 +3,8 @@ const fs = require('fs-extra');
 const solc = require('solc');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
-fs.removeSync(buildPath);
+fs.removeSync(path.resolve(buildPath, 'campaign.json'));
+fs.removeSync(path.resolve(buildPath, 'campaignFactory.json'));
 
 const CONTRACT_SOURCE = 'Campaign.sol';
 const campaignPath = path.resolve(
