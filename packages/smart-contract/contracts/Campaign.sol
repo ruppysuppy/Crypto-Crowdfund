@@ -53,6 +53,23 @@ contract Campaign {
     }
 
     // methods
+    function approveRequest(uint256 index) public {
+        Request storage request = requests[index];
+
+        require(contributors[msg.sender]);
+        require(!request.approvals[msg.sender]);
+
+        request.approvals[msg.sender] = true;
+        request.approvalCount++;
+    }
+
+    function contribute() public payable {
+        require(msg.value >= minimumContribution);
+
+        contributors[msg.sender] = true;
+        numContributors++;
+    }
+
     function createRequest(uint256 value, address recipient)
         public
         managerOnly
@@ -64,16 +81,6 @@ contract Campaign {
         request.recipient = recipient;
         request.complete = false;
         request.approvalCount = 0;
-    }
-
-    function approveRequest(uint256 index) public {
-        Request storage request = requests[index];
-
-        require(contributors[msg.sender]);
-        require(!request.approvals[msg.sender]);
-
-        request.approvals[msg.sender] = true;
-        request.approvalCount++;
     }
 
     function finalizeRequest(uint256 index) public payable managerOnly {
@@ -110,5 +117,20 @@ contract Campaign {
             requests.length,
             numContributors
         );
+    }
+
+    function isApprover(address contributor, uint256 index)
+        public
+        view
+        returns (bool)
+    {
+        require(contributors[contributor]);
+
+        Request storage request = requests[index];
+        return request.approvals[contributor];
+    }
+
+    function isContributor(address contributor) public view returns (bool) {
+        return contributors[contributor];
     }
 }

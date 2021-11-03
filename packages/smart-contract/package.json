@@ -5,12 +5,15 @@
   "scripts": {
     "compile": "node scripts/compile.js",
     "deploy": "node scripts/deploy.js",
-    "prettier": "prettier --write . --config .prettierrc.json"
+    "prettier": "prettier --write . --config .prettierrc.json",
+    "test": "mocha"
   },
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.5.1",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
+    "ganache-cli": "^6.12.2",
+    "mocha": "^9.1.3",
     "prettier": "^2.4.1",
     "prettier-plugin-solidity": "^1.0.0-beta.18",
     "solc": "^0.8.9",
