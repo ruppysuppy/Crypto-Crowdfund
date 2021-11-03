@@ -4,3 +4,9 @@
 # lock files
 yarn.lock
 package-lock.json
+
+# compiled contracts
+/build/
+
+# environment variables
+.env
