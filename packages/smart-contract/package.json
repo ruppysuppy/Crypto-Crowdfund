@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "compile": "node scripts/compile.js",
+    "copy-compiled": "node scripts/copy-compiled.js",
     "deploy": "node scripts/deploy.js",
+    "generate-files": "yarn compile && yarn deploy && yarn copy-compiled",
     "prettier": "prettier --write . --config .prettierrc.json",
     "test": "mocha"
   },

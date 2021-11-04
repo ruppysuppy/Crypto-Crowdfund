@@ -28,3 +28,9 @@ The application uses `yarn` to run.
 
    A new file `build/address.json` will be created with the address of the
    deployed contract
+
+## Generate-Files
+
+`yarn generate-files` **compiles**, **deploys** and **copies the compiled
+contract & deployed address** to the required destination in **Blockchain
+Sub-app**.
