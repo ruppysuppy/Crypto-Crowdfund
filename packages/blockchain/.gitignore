@@ -1,0 +1,12 @@
+# compiled contracts
+/src/ethereum/
+
+# node_modules
+/node_modules/
+
+# lock files
+yarn.lock
+package-lock.json
+
+# enviroment files
+.env
