@@ -42,7 +42,9 @@ instance. So a bug in one part of the application cannot affect the other parts.
 The application uses `yarn` to run.
 
 To setup the **Smart Contract** please check out the steps mentioned in the
-[ReadMe under `smart-contract`](./packages/smart-contract/ReadMe.md#Setup)
+[ReadMe under `smart-contract`](./packages/smart-contract/ReadMe.md#Setup).
+To run the **Blockchain Sub-app**,
+[generating all files](./packages/smart-contract/ReadMe.md#Generate-Files) is mandatory
 
 1. Run the command `yarn` to install all dependecies
 2. Add `.env` files at the root of **Auth Sub-app** and **Container** with the

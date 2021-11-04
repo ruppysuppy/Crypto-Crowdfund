@@ -5,3 +5,6 @@
 .next/
 build/
 dist/
+
+# compiled contracts
+packages/blockchain/src/ethereum/

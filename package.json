@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "run-container": "cd packages/container && yarn dev",
     "run-auth": "cd packages/auth && yarn dev",
+    "run-container": "cd packages/container && yarn dev",
     "run-marketing": "cd packages/marketing && yarn dev",
     "prettier": "prettier --write . --config .prettierrc.json",
     "install": "cd packages/auth && yarn && cd ../container && yarn && cd ../marketing && yarn && cd ../smart-contract && yarn"

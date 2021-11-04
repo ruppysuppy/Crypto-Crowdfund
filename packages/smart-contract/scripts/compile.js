@@ -31,8 +31,13 @@ const inputOptions = {
   },
 };
 
+console.log('Compiling Contracts...');
+
 const inputOptionsJson = JSON.stringify(inputOptions);
 const output = JSON.parse(solc.compile(inputOptionsJson)).contracts;
+
+console.log('Contracts Successfully Compiled!');
+console.log('Saving Compiled Code...');
 
 const compiledContract = {
   campaign: {
@@ -53,3 +58,5 @@ for (const contract in compiledContract) {
     compiledContract[contract],
   );
 }
+
+console.log('Compiled Code Successfully Saved!');
