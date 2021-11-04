@@ -7,6 +7,7 @@ import { Redirect, Route, Router, Switch } from 'react-router';
 import Layout from './components/hoc/Layout';
 import Error404 from './components/pages/Error404';
 import AuthApp from './components/remotes/AuthApp';
+import BlockchainApp from './components/remotes/BlockchainApp';
 import MarketingApp from './components/remotes/MarketingApp';
 import routes from './shared/routes';
 import { IUser } from './interfaces/user';
@@ -48,6 +49,15 @@ export default function App() {
       </Route>
       <Route exact path={routes.DISCLAIMER}>
         <MarketingApp user={user} />
+      </Route>
+      <Route exact path={routes.CAMPAIGNS}>
+        <BlockchainApp />
+      </Route>
+      <Route exact path={routes.CAMPAIGN}>
+        <BlockchainApp />
+      </Route>
+      <Route exact path={routes.ACCOUNT}>
+        <BlockchainApp />
       </Route>
       <Route>
         <Error404 />

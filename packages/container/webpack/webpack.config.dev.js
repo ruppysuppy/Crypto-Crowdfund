@@ -37,6 +37,7 @@ const devConfig = {
       remotes: {
         auth: 'auth@http://localhost:8001/remoteEntry.js',
         marketing: 'marketing@http://localhost:8002/remoteEntry.js',
+        blockchain: 'blockchain@http://localhost:8003/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),
