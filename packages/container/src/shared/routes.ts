@@ -8,8 +8,8 @@ const routes = {
   PRIVACY_POLICY: '/privacy-policy',
   DISCLAIMER: '/disclaimer',
   CAMPAIGNS: '/campaigns',
-  CAMPAIGN: '/campaign/:id',
-  ACCOUNT: '/account/:id',
+  CAMPAIGN: '/campaign',
+  ACCOUNT: '/account',
 };
 
 export default routes;

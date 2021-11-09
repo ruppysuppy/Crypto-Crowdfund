@@ -44,7 +44,10 @@ export default function Sidebar({ isAuthenticated, isOpen, onClose }: IProps) {
           </Navlink>
           {isAuthenticated ? (
             <>
-              <Navlink to={routes.ACCOUNT} onClick={onClose}>
+              <Navlink
+                to={`${routes.ACCOUNT}?uid=${auth.currentUser!.uid}`}
+                onClick={onClose}
+              >
                 Account
               </Navlink>
               <Navlink to={routes.HOME} onClick={signOutHandler} shouldOverride>

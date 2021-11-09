@@ -5,6 +5,7 @@ import {
   createMemoryHistory,
 } from 'history';
 import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -28,6 +29,10 @@ interface IMountOptions {
     ACCOUNT: string;
     FAQ: string;
   };
+  testAuthenticateCredentials?: {
+    email: string;
+    password: string;
+  };
   onNavigate?: (props: IOnNavigateProps) => void;
 }
 
@@ -38,6 +43,7 @@ const mount = (
     firebaseConfig,
     initialPath,
     routes,
+    testAuthenticateCredentials,
     onNavigate,
   }: IMountOptions,
 ) => {
@@ -51,6 +57,15 @@ const mount = (
   }
 
   const firebaseApp = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseApp);
+
+  if (testAuthenticateCredentials) {
+    signInWithEmailAndPassword(
+      auth,
+      testAuthenticateCredentials!.email,
+      testAuthenticateCredentials!.password,
+    );
+  }
 
   ReactDOM.render(<App history={history} routes={routes} />, mountPoint);
 
@@ -78,9 +93,13 @@ if (isStandAlone) {
     },
     routes: {
       CAMPAIGNS: '/campaigns',
-      CAMPAIGN: '/campaign/:id',
-      ACCOUNT: '/account/:id',
+      CAMPAIGN: '/campaign',
+      ACCOUNT: '/account',
       FAQ: '/faq',
+    },
+    testAuthenticateCredentials: {
+      email: process.env.TEST_AUTHENTICATE_EMAIL as string,
+      password: process.env.TEST_AUTHENTICATE_PASSWORD as string,
     },
   });
 }

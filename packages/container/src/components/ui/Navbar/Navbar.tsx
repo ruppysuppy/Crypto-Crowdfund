@@ -37,7 +37,11 @@ export default function Navbar({ isAuthenticated }: IProps) {
           }`}
         >
           <Navlink to={routes.CAMPAIGNS}>Campaigns</Navlink>
-          {isAuthenticated && <Navlink to={routes.ACCOUNT}>Account</Navlink>}
+          {isAuthenticated && (
+            <Navlink to={`${routes.ACCOUNT}?uid=${auth.currentUser!.uid}`}>
+              Account
+            </Navlink>
+          )}
           {isAuthenticated ? (
             <Navlink to={routes.HOME} onClick={signOutHandler} shouldOverride>
               Sign Out

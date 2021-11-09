@@ -1,3 +1,4 @@
+const Dotenv = require('dotenv-webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.config.common');
@@ -32,6 +33,9 @@ const devConfig = {
     ],
   },
   plugins: [
+    new Dotenv({
+      path: './.env.development',
+    }),
     new ModuleFederationPlugin({
       name: 'blockchain',
       filename: 'remoteEntry.js',

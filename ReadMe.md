@@ -47,8 +47,9 @@ To run the **Blockchain Sub-app**,
 [generating all files](./packages/smart-contract/ReadMe.md#Generate-Files) is mandatory
 
 1. Run the command `yarn` to install all dependecies
-2. Add `.env` files at the root of **Auth Sub-app** and **Container** with the
+2. Add `.env` files at the root of all **Sub-apps** and the **Container** with the
    following data:
+
    ```
    # firebase config
    API_KEY=<API-KEY>
@@ -59,6 +60,16 @@ To run the **Blockchain Sub-app**,
    APP_ID=<APP-ID>
    MEASUREMENT_ID=<MEASUREMENT-ID>
    ```
+
+   Add `.env.development` files at the root of **Blockchain Sub-app**
+   following data:
+
+   ```
+   # auth config
+   TEST_AUTHENTICATE_EMAIL=<firebase test user email>
+   TEST_AUTHENTICATE_PASSWORD=<firebase test user password>
+   ```
+
 3. Run the command `yarn run-auth` to run the **Auth Sub-app**
 
    Runs on `http://localhost:8001`. Valid routes: `/sign-in`, and `/sign-up`
@@ -68,7 +79,12 @@ To run the **Blockchain Sub-app**,
    Runs on `http://localhost:8002`. Valid routes: `/`, `/about`, `/faq`,
    `/terms-and-conditions`, `/privacy-policy`, and `/disclaimer`
 
-5. Run the command `yarn run-container` to run the **Container**
+5. Run the command `yarn run-blockchain` to run the **Blockchain Sub-app**
+
+   Runs on `http://localhost:8003`. Valid routes: `/account?uid=<user id>`, and
+   `/campaigns`
+
+6. Run the command `yarn run-container` to run the **Container**
 
    Runs on `http://localhost:3000`. Compiles all **Sub-Apps** routes and
    determines when a user can visit them, eg: restricts authenticated users
