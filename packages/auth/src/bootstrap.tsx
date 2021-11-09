@@ -49,7 +49,7 @@ const mount = (
   const history =
     defaultHistory ||
     createMemoryHistory({
-      initialEntries: initialPath ? [initialPath] : ['/sign-in'],
+      initialEntries: initialPath ? [initialPath] : [],
     });
   if (onNavigate) {
     history.listen(onNavigate);

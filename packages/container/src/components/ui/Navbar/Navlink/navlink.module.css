@@ -2,6 +2,7 @@
   text-decoration: none;
   color: var(--color-primary-dark);
   position: relative;
+  margin: calc(var(--spacing) * 4) 0;
 }
 
 .navlink::after {
@@ -31,4 +32,10 @@
 
 .navlinkActive::after {
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .navlink {
+    margin: var(--spacing);
+  }
 }

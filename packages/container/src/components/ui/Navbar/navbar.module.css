@@ -27,6 +27,54 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* Menu */
+.toggler {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  height: calc(var(--spacing) * 10);
+  width: calc(var(--spacing) * 10);
+  margin-left: auto;
+  border-radius: calc(var(--spacing) * 2);
+  cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+  width: calc(var(--spacing) * 6);
+  height: calc(var(--spacing) * 0.5);
+  background-color: var(--color-primary-dark);
+  margin: calc(var(--spacing) * 1.5) 0;
+  transition: var(--transition);
+}
+
+.toggler:hover .bar1,
+.toggler:hover .bar2,
+.toggler:hover .bar3,
+.toggler:focus .bar1,
+.toggler:focus .bar2,
+.toggler:focus .bar3 {
+  background-color: var(--color-primary-light);
+}
+
+.crossBar1 {
+  -webkit-transform: rotate(-45deg)
+    translate(calc(var(--spacing) * -2), var(--spacing));
+  transform: rotate(-45deg) translate(calc(var(--spacing) * -2), var(--spacing));
+}
+
+.crossBar2 {
+  opacity: 0;
+}
+
+.crossBar3 {
+  -webkit-transform: rotate(45deg)
+    translate(calc(var(--spacing) * -2), calc(var(--spacing) * -1));
+  transform: rotate(45deg)
+    translate(calc(var(--spacing) * -2), calc(var(--spacing) * -1));
+}
+
 @media screen and (min-width: 568px) {
   .nav {
     padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
@@ -40,6 +88,10 @@
 
   .navLinkContainer {
     display: grid;
+  }
+
+  .toggler {
+    display: none;
   }
 }
 

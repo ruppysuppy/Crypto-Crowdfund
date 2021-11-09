@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import classes from './navlink.module.css';
+import sharedClasses from '../../../../common.module.css';
 
 interface IProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ export default function Navlink({
   ) : (
     <NavLink
       to={to}
-      className={`${classes.navlink} ${props.className}`}
+      className={`${sharedClasses.p} ${classes.navlink} ${props.className}`}
       activeClassName={classes.navlinkActive}
       isActive={(_, location) => location.pathname === to}
       {...props}
