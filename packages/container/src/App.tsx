@@ -1,17 +1,19 @@
 import { createBrowserHistory } from 'history';
 
 import { onAuthStateChanged } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, Router, Switch } from 'react-router';
 
+import Error404 from './components/pages/Error404/Error404';
 import Layout from './components/hoc/Layout';
-import Error404 from './components/pages/Error404';
-import AuthApp from './components/remotes/AuthApp';
-import BlockchainApp from './components/remotes/BlockchainApp';
-import MarketingApp from './components/remotes/MarketingApp';
+import Loading from './components/pages/Loading/Loading';
 import routes from './shared/routes';
 import { IUser } from './interfaces/user';
 import { auth } from './shared/firebase';
+
+const AuthApp = lazy(() => import('./components/remotes/AuthApp'));
+const BlockchainApp = lazy(() => import('./components/remotes/BlockchainApp'));
+const MarketingApp = lazy(() => import('./components/remotes/MarketingApp'));
 
 const history = createBrowserHistory();
 
@@ -67,7 +69,9 @@ export default function App() {
 
   return (
     <Router history={history}>
-      <Layout user={user}>{validRoutes}</Layout>
+      <Layout user={user}>
+        <Suspense fallback={<Loading />}>{validRoutes}</Suspense>
+      </Layout>
     </Router>
   );
 }

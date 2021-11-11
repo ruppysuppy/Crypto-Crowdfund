@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './error404.module.css';
-import sharedClasses from '../../common.module.css';
+import sharedClasses from '../../../common.module.css';
 
 export default function Error404() {
   return (

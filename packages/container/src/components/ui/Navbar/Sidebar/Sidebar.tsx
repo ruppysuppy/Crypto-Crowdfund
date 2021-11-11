@@ -34,7 +34,7 @@ export default function Sidebar({ isAuthenticated, isOpen, onClose }: IProps) {
       >
         <div className={`${classes.sideDrawerIcon}`}>
           <Link to={routes.HOME} onClick={onClose}>
-            <img src={logo} alt="Crypto Crowdfund Logo" />
+            <img src={logo} alt="crypto-crowdfund-logo" />
           </Link>
         </div>
 

@@ -1,0 +1,58 @@
+.logoHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  background-color: var(--color-background);
+}
+
+.img {
+  width: calc(var(--spacing) * 50);
+  height: calc(var(--spacing) * 50);
+  animation: animate-glow calc(var(--transition) * 4) ease-in-out 0s infinite
+    alternate;
+}
+
+@keyframes animate-glow {
+  0% {
+    filter: drop-shadow(0 0 var(--spacing) var(--color-primary));
+    transform: scale(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 calc(var(--spacing) * 4) var(--color-primary));
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .img {
+    width: calc(var(--spacing) * 64);
+    height: calc(var(--spacing) * 64);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .img {
+    width: calc(var(--spacing) * 72);
+    height: calc(var(--spacing) * 72);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .img {
+    width: calc(var(--spacing) * 80);
+    height: calc(var(--spacing) * 80);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .img {
+    width: calc(var(--spacing) * 96);
+    height: calc(var(--spacing) * 96);
+  }
+}

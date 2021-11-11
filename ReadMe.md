@@ -61,7 +61,7 @@ To run the **Blockchain Sub-app**,
    MEASUREMENT_ID=<MEASUREMENT-ID>
    ```
 
-   Add `.env.development` files at the root of **Blockchain Sub-app**
+   Add `.env.development` file at the root of **Blockchain Sub-app**
    following data:
 
    ```
