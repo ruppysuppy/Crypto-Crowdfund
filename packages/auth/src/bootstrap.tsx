@@ -56,11 +56,10 @@ const mount = (
   }
 
   const firebaseApp = initializeApp(firebaseConfig);
-  const auth = getAuth(firebaseApp);
 
   ReactDOM.render(
     <App
-      auth={auth}
+      firebaseApp={firebaseApp}
       history={history}
       routes={routes}
       onAuthStateChangedHandler={onAuthStateChangedHandler}

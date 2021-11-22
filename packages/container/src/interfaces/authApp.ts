@@ -3,7 +3,7 @@ import { History, MemoryHistory } from 'history';
 type IOnAuthStateChanged = (
   user: {
     uid: string;
-    displayName: string | null;
+    username: string | null;
     photoURL: string | null;
   } | null,
 ) => void;

@@ -21,7 +21,17 @@ export default function App() {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => setUser(user || null));
+    onAuthStateChanged(auth, (user) =>
+      setUser(
+        user
+          ? {
+              uid: user.uid,
+              username: user.displayName,
+              photoURL: user.photoURL,
+            }
+          : null,
+      ),
+    );
   }, []);
 
   const redirect = <Redirect to={routes.CAMPAIGNS} />;
@@ -69,7 +79,7 @@ export default function App() {
 
   return (
     <Router history={history}>
-      <Layout user={user}>
+      <Layout>
         <Suspense fallback={<Loading />}>{validRoutes}</Suspense>
       </Layout>
     </Router>

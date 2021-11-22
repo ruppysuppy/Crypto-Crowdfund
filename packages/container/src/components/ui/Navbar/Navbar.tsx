@@ -9,11 +9,7 @@ import classes from './navbar.module.css';
 import logo from '../../../assets/logo.svg';
 import { auth } from '../../../shared/firebase';
 
-interface IProps {
-  isAuthenticated?: boolean;
-}
-
-export default function Navbar({ isAuthenticated }: IProps) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const signOutHandler = () => {
@@ -23,6 +19,8 @@ export default function Navbar({ isAuthenticated }: IProps) {
   const onMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const isAuthenticated = auth.currentUser !== null;
 
   return (
     <>

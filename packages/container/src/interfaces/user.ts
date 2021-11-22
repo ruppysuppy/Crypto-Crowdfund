@@ -1,6 +1,6 @@
 interface IUser {
   uid: string;
-  displayName: string | null;
+  username: string | null;
   photoURL: string | null;
 }
 

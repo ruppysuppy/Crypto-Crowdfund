@@ -14,7 +14,7 @@
   --transition: 0.15s;
 }
 
-.root * {
+.root *:not(i) {
   font-family: 'Roboto', sans-serif;
   outline: none !important;
 }

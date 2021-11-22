@@ -3,18 +3,16 @@ import { useHistory } from 'react-router';
 
 import Footer from '../ui/Footer/Footer';
 import Navbar from '../ui/Navbar/Navbar';
-import { IUser } from '../../interfaces/user';
 
 import classes from './layout.module.css';
 
 interface IProps {
   children: React.ReactNode;
-  user: IUser | null;
 }
 
 let lastPathName = '';
 
-const Layout = ({ children, user }: IProps) => {
+const Layout = ({ children }: IProps) => {
   // workaround for scroll to top on route change
   const ref = useRef<HTMLDivElement | null>(null);
   const history = useHistory();
@@ -44,7 +42,7 @@ const Layout = ({ children, user }: IProps) => {
 
   return (
     <div className={classes.containerRoot}>
-      <Navbar isAuthenticated={!!user} />
+      <Navbar />
       <div className={classes.body} ref={ref}>
         <main>{children}</main>
         <Footer />

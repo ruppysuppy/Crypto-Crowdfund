@@ -1,4 +1,5 @@
-import { Auth, signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ import classes from '../../../common.module.css';
 import sharedClasses from '../../../common.module.css';
 
 interface IProps {
-  auth: Auth;
+  firebaseApp: FirebaseApp;
   routes: {
     CAMPAIGNS: string;
     SIGN_UP: string;
@@ -22,7 +23,7 @@ interface IProps {
 }
 
 export default function SignIn({
-  auth,
+  firebaseApp,
   routes,
   onAuthStateChangedHandler,
 }: IProps) {
@@ -33,6 +34,8 @@ export default function SignIn({
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+
+  const auth = getAuth(firebaseApp);
 
   const validate = () => {
     setEmailError('');
@@ -69,14 +72,14 @@ export default function SignIn({
         onAuthStateChangedHandler({
           uid: user.uid,
           photoURL: user.photoURL,
-          displayName: user.displayName,
+          username: user.displayName,
         });
       history.push(routes.CAMPAIGNS);
     } catch (error) {
       // @ts-ignore
       setError(error.code);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

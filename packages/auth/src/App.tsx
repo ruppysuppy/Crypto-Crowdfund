@@ -1,6 +1,6 @@
 import { History, MemoryHistory } from 'history';
-
-import { Auth, onAuthStateChanged } from 'firebase/auth';
+import { FirebaseApp } from '@firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 
@@ -12,7 +12,7 @@ import { IOnAuthStateChanged } from './shared/authTypes';
 import classes from './app.module.css';
 
 interface IProps {
-  auth: Auth;
+  firebaseApp: FirebaseApp;
   history: History | MemoryHistory;
   routes: {
     CAMPAIGNS: string;
@@ -24,13 +24,24 @@ interface IProps {
 }
 
 export default function App({
-  auth,
+  firebaseApp,
   history,
   routes,
   onAuthStateChangedHandler,
 }: IProps) {
+  const auth = getAuth(firebaseApp);
   if (onAuthStateChangedHandler) {
-    onAuthStateChanged(auth, onAuthStateChangedHandler);
+    onAuthStateChanged(auth, (user) =>
+      onAuthStateChangedHandler(
+        user
+          ? {
+              uid: user.uid,
+              username: user.displayName,
+              photoURL: user.photoURL,
+            }
+          : null,
+      ),
+    );
   }
 
   return (
@@ -41,14 +52,14 @@ export default function App({
             <Route exact path={routes.SIGN_IN}>
               <SignIn
                 routes={routes}
-                auth={auth}
+                firebaseApp={firebaseApp}
                 onAuthStateChangedHandler={onAuthStateChangedHandler}
               />
             </Route>
             <Route exact path={routes.SIGN_UP}>
               <SignUp
                 routes={routes}
-                auth={auth}
+                firebaseApp={firebaseApp}
                 onAuthStateChangedHandler={onAuthStateChangedHandler}
               />
             </Route>

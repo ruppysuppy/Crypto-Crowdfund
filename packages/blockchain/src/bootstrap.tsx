@@ -8,8 +8,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 import App from './App';
+import rootReducer from './store/reducers/rootReducer';
+import { setFirebaseApp } from './shared/firebase';
 
 interface IOnNavigateProps {
   pathname: string;
@@ -36,6 +41,12 @@ interface IMountOptions {
   onNavigate?: (props: IOnNavigateProps) => void;
 }
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 const mount = (
   mountPoint: HTMLElement,
   {
@@ -58,6 +69,7 @@ const mount = (
 
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
+  setFirebaseApp(firebaseApp);
 
   if (testAuthenticateCredentials) {
     signInWithEmailAndPassword(
@@ -67,7 +79,22 @@ const mount = (
     );
   }
 
-  ReactDOM.render(<App history={history} routes={routes} />, mountPoint);
+  const composeEnhancers =
+    (process.env.NODE_ENV === 'development'
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : null) || compose;
+
+  const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunk)),
+  );
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <App history={history} routes={routes} />
+    </Provider>,
+    mountPoint,
+  );
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {

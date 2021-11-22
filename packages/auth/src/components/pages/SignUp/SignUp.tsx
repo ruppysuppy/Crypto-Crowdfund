@@ -1,8 +1,6 @@
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
+import { FirebaseApp } from 'firebase/app';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -17,7 +15,7 @@ import classes from '../../../common.module.css';
 import sharedClasses from '../../../common.module.css';
 
 interface IProps {
-  auth: Auth;
+  firebaseApp: FirebaseApp;
   routes: {
     CAMPAIGNS: string;
     SIGN_IN: string;
@@ -26,7 +24,7 @@ interface IProps {
 }
 
 export default function SignIn({
-  auth,
+  firebaseApp,
   routes,
   onAuthStateChangedHandler,
 }: IProps) {
@@ -41,6 +39,9 @@ export default function SignIn({
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+
+  const auth = getAuth(firebaseApp);
+  const firestore = getFirestore(firebaseApp);
 
   const validate = () => {
     setEmailError('');
@@ -77,28 +78,30 @@ export default function SignIn({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (!validate()) {
       return;
     }
-
     setIsLoading(true);
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser!, { displayName: username });
+      await setDoc(doc(firestore, 'users', auth.currentUser!.uid), {
+        username,
+      });
+
       const user = auth.currentUser!;
       onAuthStateChangedHandler &&
         onAuthStateChangedHandler({
           uid: user.uid,
           photoURL: user.photoURL,
-          displayName: user.displayName,
+          username: user.displayName,
         });
       history.push(routes.CAMPAIGNS);
     } catch (error) {
       // @ts-ignore
       setError(error.code);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
