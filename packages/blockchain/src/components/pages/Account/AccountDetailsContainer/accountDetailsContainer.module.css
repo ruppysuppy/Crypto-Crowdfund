@@ -1,12 +1,21 @@
 .accountDetailsContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   width: 100%;
   padding: calc(var(--spacing) * 6) calc(var(--spacing) * 8);
   border-radius: calc(var(--spacing) * 2);
   margin-top: calc(var(--spacing) * 7);
   background-color: var(--color-paper);
+}
+
+.inputContainer {
+  flex: 1;
+}
+
+.button {
+  margin-right: calc(var(--spacing) * 2);
 }
 
 .profilePicContainer {
@@ -26,21 +35,28 @@
   border-radius: 50%;
 }
 
-.placeholder {
+.profilePicContainer .placeholder {
   color: var(--color-background);
   margin: 0;
 }
 
 .infoContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex: 1;
   margin-left: calc(var(--spacing) * 4);
 }
 
 .infoContainer h2 {
   margin: 0;
+}
+
+.infoContainer a {
+  display: inline-block;
+  margin-top: calc(var(--spacing) * 2);
+}
+
+.infoContainer i {
+  display: inline-block;
+  margin-right: calc(var(--spacing) * 2);
 }
 
 .editButton {

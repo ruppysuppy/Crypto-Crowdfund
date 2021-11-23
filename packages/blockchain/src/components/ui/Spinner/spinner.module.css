@@ -1,0 +1,17 @@
+.spinner {
+  border: var(--spacing) solid var(--color-secondary);
+  border-radius: 50%;
+  border-top: var(--spacing) solid var(--color-primary);
+  width: calc(var(--spacing) * 6);
+  height: calc(var(--spacing) * 6);
+  animation: spin calc(var(--transition) * 3) linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

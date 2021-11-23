@@ -3,13 +3,15 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 
+import AccountDetailsContainer from './AccountDetailsContainer/AccountDetailsContainer';
 import Layout from '../../hoc/Layout';
-import Loader from '../../ui/Loader/Loader';
+import Spinner from '../../ui/Spinner/Spinner';
 import { IRoutes } from '../../../interfaces/routes';
 import useQuery from '../../../hooks/useQuery';
 import { IUser } from '../../../interfaces/user';
 import { getFirebaseApp } from '../../../shared/firebase';
-import AccountDetailsContainer from './AccountDetailsContainer/AccountDetailsContainer';
+
+import classes from './account.module.css';
 
 interface IProps {
   routes: IRoutes;
@@ -24,7 +26,6 @@ export default function Account({ routes }: IProps) {
   const redirectComponent = <Redirect to={routes.CAMPAIGNS} />;
 
   const firebaseApp = getFirebaseApp()!;
-  const auth = getAuth(firebaseApp);
   const firestore = getFirestore(firebaseApp);
 
   useEffect(() => {
@@ -42,10 +43,9 @@ export default function Account({ routes }: IProps) {
 
       try {
         const userDoc = await getDoc(doc(firestore, 'users', uid));
-        const userData = {
-          ...(userDoc.data() as IUser),
-          uid: userDoc.id,
-        };
+        const userData = userDoc.exists()
+          ? { ...(userDoc.data() as IUser), uid: userDoc.id }
+          : null;
         setUser(userData);
       } catch (error) {
         console.error(error);
@@ -63,10 +63,12 @@ export default function Account({ routes }: IProps) {
     <Layout faqLink={routes.FAQ}>
       <div>
         {isLoading ? (
-          <Loader />
+          <div className={classes.spinnerContainer}>
+            <Spinner />
+          </div>
         ) : (
           <>
-            <AccountDetailsContainer user={user!} />
+            <AccountDetailsContainer user={user!} setUser={setUser} />
           </>
         )}
       </div>

@@ -1,0 +1,6 @@
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  margin: calc(var(--spacing) * 8) 0;
+  height: 100%;
+}

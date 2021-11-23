@@ -4,3 +4,9 @@ export interface IUser {
   photoUrl?: string;
   website?: string;
 }
+
+export interface IEditUser {
+  username: string;
+  photoUrl?: string;
+  website?: string;
+}
