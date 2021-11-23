@@ -14,7 +14,7 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import rootReducer from './store/reducers/rootReducer';
-import { setFirebaseApp } from './shared/firebase';
+import { setFirebaseApp } from './utils/firebase';
 
 interface IOnNavigateProps {
   pathname: string;

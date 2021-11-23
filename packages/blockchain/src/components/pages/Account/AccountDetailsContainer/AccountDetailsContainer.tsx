@@ -7,7 +7,8 @@ import ErrorBanner from '../../../ui/ErrorBanner/ErrorBanner';
 import Input from '../../../ui/Input/Input';
 import Spinner from '../../../ui/Spinner/Spinner';
 import { IEditUser, IUser } from '../../../../interfaces/user';
-import { getFirebaseApp } from '../../../../shared/firebase';
+import { getFirebaseApp } from '../../../../utils/firebase';
+import { checkUrlImage } from '../../../../utils/regex';
 
 import classes from './accountDetailsContainer.module.css';
 import sharedClasses from '../../../../common.module.css';
@@ -19,6 +20,8 @@ interface IProps {
 
 export default function AccountDetailsContainer({ user, setUser }: IProps) {
   const [error, setError] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [photoUrlError, setPhotoUrlError] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [editedUser, setEditedUser] = useState<IEditUser>({
@@ -35,9 +38,28 @@ export default function AccountDetailsContainer({ user, setUser }: IProps) {
     setEditedUser({ ...editedUser, [name]: value });
   };
 
+  const validate = () => {
+    let isValid = true;
+    setPhotoUrlError('');
+    setUsernameError('');
+
+    if (editedUser.username.trim() === '') {
+      setUsernameError('Invalid Username');
+      isValid = false;
+    }
+    if (editedUser.photoUrl && !checkUrlImage(editedUser.photoUrl.trim())) {
+      setPhotoUrlError('Invalid Photo URL');
+      isValid = false;
+    }
+    return isValid;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError('');
+    if (!validate()) {
+      return;
+    }
     setIsLoading(true);
     try {
       if (user.uid === auth.currentUser!.uid) {
@@ -72,6 +94,8 @@ export default function AccountDetailsContainer({ user, setUser }: IProps) {
                 name="username"
                 value={editedUser.username}
                 onChange={handleChange}
+                error={!!usernameError}
+                helperText={usernameError}
                 fullwidth
               />
               <Input
@@ -79,6 +103,8 @@ export default function AccountDetailsContainer({ user, setUser }: IProps) {
                 name="photoUrl"
                 value={editedUser.photoUrl}
                 onChange={handleChange}
+                error={!!photoUrlError}
+                helperText={photoUrlError}
                 fullwidth
               />
               <Input

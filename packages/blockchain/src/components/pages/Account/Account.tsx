@@ -9,7 +9,7 @@ import Spinner from '../../ui/Spinner/Spinner';
 import { IRoutes } from '../../../interfaces/routes';
 import useQuery from '../../../hooks/useQuery';
 import { IUser } from '../../../interfaces/user';
-import { getFirebaseApp } from '../../../shared/firebase';
+import { getFirebaseApp } from '../../../utils/firebase';
 
 import classes from './account.module.css';
 
