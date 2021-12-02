@@ -11,10 +11,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import Web3 from 'web3';
 
 import App from './App';
 import rootReducer from './store/reducers/rootReducer';
 import { setFirebaseApp } from './utils/firebase';
+
+declare global {
+  interface Window {
+    web3?: Web3;
+  }
+}
 
 interface IOnNavigateProps {
   pathname: string;

@@ -50,7 +50,7 @@ To run the **Blockchain Sub-app**,
 2. Add `.env` files at the root of all **Sub-apps** and the **Container** with the
    following data:
 
-   ```
+   ```python
    # firebase config
    API_KEY=<API-KEY>
    AUTH_DOMAIN=<AUTH-DOMAIN.firebaseapp.com>
@@ -64,10 +64,18 @@ To run the **Blockchain Sub-app**,
    Add `.env.development` file at the root of **Blockchain Sub-app**
    following data:
 
-   ```
+   ```python
    # auth config
    TEST_AUTHENTICATE_EMAIL=<firebase test user email>
    TEST_AUTHENTICATE_PASSWORD=<firebase test user password>
+   ```
+
+   and also add the infura key in the `.env` file in the **Blockchain Sub-app**
+
+   ```python
+   # ...
+   # infura key
+   INFURA_ENDPOINT=<infura endpoint: rinkeby network>
    ```
 
 3. Run the command `yarn run-auth` to run the **Auth Sub-app**

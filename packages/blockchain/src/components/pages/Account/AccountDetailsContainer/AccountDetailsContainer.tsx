@@ -74,7 +74,6 @@ export default function AccountDetailsContainer({ user, setUser }: IProps) {
         setIsEditing(false);
       }
     } catch (error) {
-      console.log('[ERROR]', error);
       // @ts-ignore
       setError(error.code);
     }
