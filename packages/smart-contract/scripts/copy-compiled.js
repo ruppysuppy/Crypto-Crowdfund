@@ -12,6 +12,7 @@ const targetPath = path.resolve(
 );
 
 const filesToCopy = {
+  campaign: path.resolve(sourcePath, 'campaign.json'),
   campaignFactory: path.resolve(sourcePath, 'campaignFactory.json'),
   deployedAddress: path.resolve(sourcePath, 'address.json'),
 };

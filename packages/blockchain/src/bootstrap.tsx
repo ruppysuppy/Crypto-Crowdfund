@@ -16,6 +16,7 @@ import Web3 from 'web3';
 import App from './App';
 import rootReducer from './store/reducers/rootReducer';
 import { setFirebaseApp } from './utils/firebase';
+import { IRoutes } from './interfaces/routes';
 
 declare global {
   interface Window {
@@ -35,12 +36,7 @@ interface IMountOptions {
     appId: string;
   };
   initialPath?: string;
-  routes: {
-    CAMPAIGNS: string;
-    CAMPAIGN: string;
-    ACCOUNT: string;
-    FAQ: string;
-  };
+  routes: IRoutes;
   testAuthenticateCredentials?: {
     email: string;
     password: string;
@@ -128,6 +124,7 @@ if (isStandAlone) {
     routes: {
       CAMPAIGNS: '/campaigns',
       CAMPAIGN: '/campaign',
+      CREATE_CAMPAIGN: '/create-campaign',
       ACCOUNT: '/account',
       FAQ: '/faq',
     },

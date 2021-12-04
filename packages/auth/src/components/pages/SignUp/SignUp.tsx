@@ -113,7 +113,6 @@ export default function SignIn({
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
-          type="username"
           error={!!usernameError}
           helperText={usernameError}
           autoFocus

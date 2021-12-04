@@ -26,3 +26,7 @@
   border: 1px solid var(--color-primary-light) !important;
   background-color: transparent;
 }
+
+.fullWidth {
+  width: 100%;
+}

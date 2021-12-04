@@ -8,9 +8,15 @@ interface IProps {
   children: React.ReactNode;
   faqLink: string;
   sidebar?: React.ReactNode;
+  sidebarAddition?: React.ReactNode;
 }
 
-export default function Layout({ children, faqLink, sidebar }: IProps) {
+export default function Layout({
+  children,
+  faqLink,
+  sidebar,
+  sidebarAddition,
+}: IProps) {
   return (
     <div className={classes.root}>
       <section>{children}</section>
@@ -30,6 +36,7 @@ export default function Layout({ children, faqLink, sidebar }: IProps) {
                 here
               </Link>
             </p>
+            {sidebarAddition}
           </>
         )}
       </section>

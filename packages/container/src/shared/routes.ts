@@ -9,6 +9,7 @@ const routes = {
   DISCLAIMER: '/disclaimer',
   CAMPAIGNS: '/campaigns',
   CAMPAIGN: '/campaign',
+  CREATE_CAMPAIGN: '/create-campaign',
   ACCOUNT: '/account',
 };
 
