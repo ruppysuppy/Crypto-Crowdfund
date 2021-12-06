@@ -10,6 +10,10 @@
   margin: 0.5rem 0;
 }
 
+textarea.input {
+  resize: vertical;
+}
+
 .input::placeholder {
   color: var(--color-primary-dark);
   transition: var(--transition) ease-in-out;

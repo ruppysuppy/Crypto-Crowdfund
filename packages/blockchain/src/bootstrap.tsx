@@ -20,6 +20,7 @@ import { IRoutes } from './interfaces/routes';
 
 declare global {
   interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
     web3?: Web3;
   }
 }
@@ -42,12 +43,6 @@ interface IMountOptions {
     password: string;
   };
   onNavigate?: (props: IOnNavigateProps) => void;
-}
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
 }
 
 const mount = (

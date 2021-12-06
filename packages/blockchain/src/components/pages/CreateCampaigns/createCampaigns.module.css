@@ -1,0 +1,19 @@
+.postfixGrid {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 10px;
+  margin: 16px 0;
+}
+
+.postfixGrid input {
+  margin: 0;
+}
+
+.postfixGrid div p {
+  margin-bottom: 0;
+}
+
+.postfixGridInfo {
+  color: var(--color-primary);
+  margin: 12px 0 0 0;
+}
