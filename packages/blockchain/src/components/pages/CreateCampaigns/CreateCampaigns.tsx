@@ -7,7 +7,7 @@ import ErrorBanner from '../../ui/ErrorBanner/ErrorBanner';
 import Layout from '../../hoc/Layout';
 import Input from '../../ui/Input/Input';
 import Spinner from '../../ui/Spinner/Spinner';
-import { ICampaign } from '../../../interfaces/campaign';
+import { ICampaignServerData } from '../../../interfaces/campaign';
 import { IRoutes } from '../../../interfaces/routes';
 import { getFirebaseApp } from '../../../utils/firebase';
 import CampaignFactory from '../../../utils/campaignFactory';
@@ -16,6 +16,7 @@ import web3 from '../../../utils/web3';
 
 import classes from './createCampaigns.module.css';
 import sharedClasses from '../../../common.module.css';
+import { getAuth } from '@firebase/auth';
 
 interface IProps {
   routes: IRoutes;
@@ -79,10 +80,16 @@ export default function CreateCampaigns({ routes }: IProps) {
       return;
     }
     setIsLoading(true);
+    const firebaseApp = getFirebaseApp()!;
+    const firestore = getFirestore(firebaseApp);
+    const auth = getAuth(firebaseApp);
     let campaignAddress: string;
     try {
       if (!web3) {
         throw new Error('Web3 Provider Error');
+      }
+      if (!auth.currentUser) {
+        throw new Error('Please Log in to create a campaign');
       }
       let account: string;
       try {
@@ -103,16 +110,15 @@ export default function CreateCampaigns({ routes }: IProps) {
       return;
     }
     try {
-      const data: ICampaign = {
+      const data: ICampaignServerData = {
         name: name,
         description: description,
         photoUrl: photoUrl,
         goal: +goal,
         currentAmount: 0,
         isoTime: new Date().toISOString(),
+        uid: auth.currentUser.uid,
       };
-      const firebaseApp = getFirebaseApp()!;
-      const firestore = getFirestore(firebaseApp);
       await setDoc(doc(firestore, 'campaigns', campaignAddress), data);
     } catch (error) {
       // @ts-ignore

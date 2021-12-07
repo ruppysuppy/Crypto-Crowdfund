@@ -31,7 +31,8 @@ export default function Layout({
             </h2>
             <p className={sharedClasses.p}>
               All actions modifying the BlockChain incurs the use of gas, which
-              costs a small amount of Ether. For details, click{' '}
+              costs a small amount of Ether & require around 15 seconds to
+              resolve. For details, click{' '}
               <Link to={faqLink} className={sharedClasses.link}>
                 here
               </Link>

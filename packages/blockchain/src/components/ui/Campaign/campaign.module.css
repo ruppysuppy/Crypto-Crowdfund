@@ -1,0 +1,62 @@
+.root {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-paper);
+  width: 100%;
+  padding: calc(var(--spacing) * 4);
+  border-radius: calc(var(--spacing) * 2);
+  margin-top: calc(var(--spacing) * 2);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.imageHolder {
+  height: calc(var(--spacing) * 10);
+  width: calc(var(--spacing) * 10);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  background-position: center;
+  background-size: cover;
+}
+
+.infoHolder {
+  flex: 1;
+  margin-left: calc(var(--spacing) * 4);
+}
+
+.infoHolder h3 {
+  margin-bottom: calc(var(--spacing) * 2);
+  margin-top: 0;
+}
+
+@media screen and (min-width: 568px) {
+  .root {
+    padding: calc(var(--spacing) * 5);
+    border-radius: calc(var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .infoHolder {
+    margin-left: calc(var(--spacing) * 5);
+  }
+  .imageHolder {
+    height: calc(var(--spacing) * 12);
+    width: calc(var(--spacing) * 12);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .root {
+    padding: calc(var(--spacing) * 6);
+    margin-top: calc(var(--spacing) * 6);
+  }
+  .infoHolder {
+    margin-left: calc(var(--spacing) * 6);
+  }
+  .imageHolder {
+    height: calc(var(--spacing) * 16);
+    width: calc(var(--spacing) * 16);
+  }
+  .time {
+    padding-top: var(--spacing);
+  }
+}
