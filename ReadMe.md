@@ -52,13 +52,13 @@ To run the **Blockchain Sub-app**,
 
    ```python
    # firebase config
-   API_KEY=<API-KEY>
-   AUTH_DOMAIN=<AUTH-DOMAIN.firebaseapp.com>
-   PROJECT_ID=<PROJECT-ID>
-   STORAGE_BUCKET=<STORAGE-BUCKET.appspot.com>
-   MESSAGING_SENDER_ID=<MESSAGING-SENDER-ID>
-   APP_ID=<APP-ID>
-   MEASUREMENT_ID=<MEASUREMENT-ID>
+   API_KEY=<api_key>
+   AUTH_DOMAIN=<auth_domain.firebaseapp.com>
+   PROJECT_ID=<project_id>
+   STORAGE_BUCKET=<storage_bucket.appspot.com>
+   MESSAGING_SENDER_ID=<messaging_sender_id>
+   APP_ID=<app_id>
+   MEASUREMENT_ID=<measurement_id>
    ```
 
    Add `.env.development` file at the root of **Blockchain Sub-app**
@@ -66,8 +66,8 @@ To run the **Blockchain Sub-app**,
 
    ```python
    # auth config
-   TEST_AUTHENTICATE_EMAIL=<firebase test user email>
-   TEST_AUTHENTICATE_PASSWORD=<firebase test user password>
+   TEST_AUTHENTICATE_EMAIL=<firebase_test_user_email>
+   TEST_AUTHENTICATE_PASSWORD=<firebase_test_user_password>
    ```
 
    and also add the infura key in the `.env` file in the **Blockchain Sub-app**
@@ -75,7 +75,7 @@ To run the **Blockchain Sub-app**,
    ```python
    # ...
    # infura key
-   INFURA_ENDPOINT=<infura endpoint: rinkeby network>
+   INFURA_PROJECT_ID=<infura_project_id>
    ```
 
 3. Run the command `yarn run-auth` to run the **Auth Sub-app**
@@ -89,11 +89,16 @@ To run the **Blockchain Sub-app**,
 
 5. Run the command `yarn run-blockchain` to run the **Blockchain Sub-app**
 
-   Runs on `http://localhost:8003`. Valid routes: `/account?uid=<user id>`, and
-   `/campaigns`
+   Runs on `http://localhost:8003`. Valid routes: `/account?uid=<user_id>`,
+   `/campaign?id=<campaign_id>`, `/campaigns` and `/create-campaign`
 
 6. Run the command `yarn run-container` to run the **Container**
 
    Runs on `http://localhost:3000`. Compiles all **Sub-Apps** routes and
    determines when a user can visit them, eg: restricts authenticated users
    from visiting `/sign-in`, and `/sign-up`
+
+**NOTE:** The application is hard-coded to run on **Rinkeby Network**. To use the
+application on other networks, please switch to the desired network in the
+[web3.ts](./packages/blockchain/src/utils/web3.ts) and
+[deploy.js](./packages/smart-contract/scripts/deploy.js) files.
