@@ -17,7 +17,11 @@ export default function Navlink({
   ...props
 }: IProps) {
   return shouldOverride ? (
-    <a href={to} className={`${classes.navlink} ${props.className}`} {...props}>
+    <a
+      href={to}
+      className={`${sharedClasses.p} ${classes.navlink} ${props.className}`}
+      {...props}
+    >
       {children}
     </a>
   ) : (
