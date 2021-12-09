@@ -1,9 +1,9 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { ICampaign } from '../../../interfaces/campaign';
 import { IRoutes } from '../../../interfaces/routes';
-import { formatTime } from '../../../utils/time';
+import { formatTimeShort } from '../../../utils/format';
 
 import sharedClasses from '../../../common.module.css';
 import classes from './campaign.module.css';
@@ -14,15 +14,11 @@ interface IProps {
 }
 
 export default function Campaign({ campaign, routes }: IProps) {
-  const history = useHistory();
   const time = new Date(campaign.isoTime);
-  const navigateToCampaign = () => {
-    const route = `${routes.CAMPAIGN}?id=${campaign.id}`;
-    history.push(route);
-  };
 
   return (
-    <div className={classes.root} onClick={navigateToCampaign}>
+    <div className={classes.root}>
+      <a href={`${routes.CAMPAIGN}?id=${campaign.id}`} />
       {campaign.photoUrl && (
         <div
           className={classes.imageHolder}
@@ -36,18 +32,17 @@ export default function Campaign({ campaign, routes }: IProps) {
         {campaign.username && (
           <div className={sharedClasses.p}>
             <span>By: </span>
-            <a
+            <Link
               className={sharedClasses.link}
-              href={`${routes.ACCOUNT}?uid=${campaign.uid}`}
-              onClick={(e) => e.stopPropagation()}
+              to={`${routes.ACCOUNT}?uid=${campaign.uid}`}
             >
               {campaign.username}
-            </a>
+            </Link>
           </div>
         )}
       </div>
       <span className={`${sharedClasses.p} ${classes.time}`}>
-        Created: {formatTime(time)}
+        Created: {formatTimeShort(time)}
       </span>
     </div>
   );

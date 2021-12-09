@@ -4,6 +4,14 @@ interface ICampaign extends ICampaignServerData {
   userPhotoUrl?: string;
 }
 
+interface ICampaignCompleteData extends ICampaign {
+  manager: string;
+  balance: string;
+  minimumContribution: string;
+  requestCount: number;
+  contributorsCount: number;
+}
+
 interface ICampaignServerData {
   name: string;
   description: string;
@@ -14,4 +22,4 @@ interface ICampaignServerData {
   uid: string;
 }
 
-export { ICampaign, ICampaignServerData };
+export { ICampaign, ICampaignCompleteData, ICampaignServerData };
