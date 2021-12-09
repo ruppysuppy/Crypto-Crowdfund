@@ -16,7 +16,6 @@ import Layout from '../../hoc/Layout';
 import Spinner from '../../ui/Spinner/Spinner';
 import { ICampaign } from '../../../interfaces/campaign';
 import { IRoutes } from '../../../interfaces/routes';
-import useQuery from '../../../hooks/useQuery';
 import { IUser } from '../../../interfaces/user';
 import { getFirebaseApp } from '../../../utils/firebase';
 
@@ -32,24 +31,17 @@ export default function Account({ routes }: IProps) {
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [campaignData, setCampaignData] = useState<ICampaign[]>([]);
 
-  const query = useQuery();
-  let uid = query.get('uid');
   const redirectComponent = <Redirect to={routes.CAMPAIGNS} />;
-
   const firebaseApp = getFirebaseApp()!;
   const firestore = getFirestore(firebaseApp);
 
   useEffect(() => {
     const getUser = async () => {
-      // workaround for micro-frontend architecture query params
+      const url = new URL(window.location.href);
+      const uid = url.searchParams.get('uid');
       if (!uid) {
-        const url = new URL(window.location.href);
-        const param = url.searchParams.get('uid');
-        if (!param) {
-          setIsLoading(false);
-          return;
-        }
-        uid = param;
+        setIsLoading(false);
+        return;
       }
       let username: string = '';
       try {

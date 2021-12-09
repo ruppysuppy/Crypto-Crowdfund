@@ -67,7 +67,10 @@ export default function CreateCampaigns({ routes }: IProps) {
       setGoalError('Goal must be a valid number');
       isValid = false;
     }
-    if (photoUrl && !checkUrlImage(photoUrl)) {
+    if (!photoUrl) {
+      setPhotoUrlError('Please enter a photo url');
+      isValid = false;
+    } else if (!checkUrlImage(photoUrl)) {
       setPhotoUrlError('Please enter a valid image url');
       isValid = false;
     }
