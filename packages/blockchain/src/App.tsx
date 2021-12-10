@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 
 import Account from './components/pages/Account/Account';
+import Campaign from './components/pages/Campaign/Campaign';
 import Campaigns from './components/pages/Campaigns/Campaigns';
 import CreateCampaigns from './components/pages/CreateCampaigns/CreateCampaigns';
 import { IRoutes } from './interfaces/routes';
@@ -19,6 +20,9 @@ export default function App({ history, routes }: IProps) {
     <div className={classes.root}>
       <Router history={history}>
         <Switch>
+          <Route exact path={routes.CAMPAIGN}>
+            <Campaign routes={routes} />
+          </Route>
           <Route exact path={routes.CAMPAIGNS}>
             <Campaigns routes={routes} />
           </Route>

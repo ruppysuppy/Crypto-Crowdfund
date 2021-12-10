@@ -1,0 +1,130 @@
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  margin: calc(var(--spacing) * 8) 0;
+  height: 100%;
+}
+
+.coverImgHolder {
+  width: 100%;
+  height: calc(var(--spacing) * 50);
+  background-size: cover;
+  background-position: center;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  margin-top: calc(var(--spacing) * 2);
+}
+
+.profilePicContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--spacing) * 8);
+  height: calc(var(--spacing) * 8);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  overflow: hidden;
+}
+
+.profilePicContainer img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.profilePicContainer .placeholder {
+  color: var(--color-background);
+  margin: 0;
+}
+
+.userContainer > a {
+  margin-left: calc(var(--spacing) * 2);
+}
+
+.buttonHolder {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.editButton {
+  color: var(--color-primary-dark);
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.editButton:hover {
+  color: var(--color-primary-light);
+}
+
+.textInfo {
+  margin-top: calc(var(--spacing) * 4);
+  color: var(--color-primary-light);
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-column-gap: calc(var(--spacing) * 2);
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: calc(var(--spacing) * 4);
+  margin-top: calc(var(--spacing) * 4);
+}
+
+.description {
+  white-space: pre-wrap;
+  margin-top: calc(var(--spacing) * 4);
+}
+
+@media screen and (min-width: 568px) {
+  .coverImgHolder {
+    height: calc(var(--spacing) * 56);
+    margin-top: calc(var(--spacing) * 6);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .coverImgHolder {
+    height: calc(var(--spacing) * 64);
+    margin-top: calc(var(--spacing) * 7);
+  }
+  .profilePicContainer {
+    width: calc(var(--spacing) * 10);
+    height: calc(var(--spacing) * 10);
+  }
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--spacing) * 6);
+  }
+  .textInfo,
+  .gridContainer,
+  .description {
+    margin-top: calc(var(--spacing) * 6);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .coverImgHolder {
+    margin-top: calc(var(--spacing) * 8);
+  }
+  .profilePicContainer {
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
+  }
+  .gridContainer {
+    grid-column-gap: calc(var(--spacing) * 10);
+    grid-row-gap: calc(var(--spacing) * 8);
+  }
+  .textInfo,
+  .gridContainer,
+  .description {
+    margin-top: calc(var(--spacing) * 8);
+  }
+}
