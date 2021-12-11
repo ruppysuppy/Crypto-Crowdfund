@@ -71,6 +71,9 @@ export default function App() {
       <Route exact path={routes.CREATE_CAMPAIGN}>
         <BlockchainApp />
       </Route>
+      <Route exact path={routes.EDIT_CAMPAIGN}>
+        <BlockchainApp />
+      </Route>
       <Route exact path={routes.ACCOUNT}>
         <BlockchainApp />
       </Route>

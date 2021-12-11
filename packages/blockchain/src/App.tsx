@@ -6,6 +6,7 @@ import Account from './components/pages/Account/Account';
 import Campaign from './components/pages/Campaign/Campaign';
 import Campaigns from './components/pages/Campaigns/Campaigns';
 import CreateCampaigns from './components/pages/CreateCampaigns/CreateCampaigns';
+import EditCampaign from './components/pages/EditCampaign/EditCampaign';
 import { IRoutes } from './interfaces/routes';
 
 import classes from './app.module.css';
@@ -28,6 +29,9 @@ export default function App({ history, routes }: IProps) {
           </Route>
           <Route exact path={routes.CREATE_CAMPAIGN}>
             <CreateCampaigns routes={routes} />
+          </Route>
+          <Route exact path={routes.EDIT_CAMPAIGN}>
+            <EditCampaign routes={routes} />
           </Route>
           <Route exact path={routes.ACCOUNT}>
             <Account routes={routes} />

@@ -9,10 +9,14 @@ interface IBlockchainMountOptions {
   };
   initialPath?: string;
   routes: {
-    FAQ: string;
+    ACCOUNT: string;
     CAMPAIGNS: string;
     CAMPAIGN: string;
-    ACCOUNT: string;
+    CREATE_CAMPAIGN: string;
+    EDIT_CAMPAIGN: string;
+    FAQ: string;
+    SIGN_IN: string;
+    SIGN_UP: string;
   };
   onNavigate?: (props: { pathname: string }) => void;
 }

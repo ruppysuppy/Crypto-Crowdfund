@@ -120,8 +120,11 @@ if (isStandAlone) {
       CAMPAIGNS: '/campaigns',
       CAMPAIGN: '/campaign',
       CREATE_CAMPAIGN: '/create-campaign',
+      EDIT_CAMPAIGN: '/edit-campaign',
       ACCOUNT: '/account',
       FAQ: '/faq',
+      SIGN_IN: '/sign-in',
+      SIGN_UP: '/sign-up',
     },
     testAuthenticateCredentials: {
       email: process.env.TEST_AUTHENTICATE_EMAIL as string,

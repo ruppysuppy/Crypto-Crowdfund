@@ -10,6 +10,7 @@ const routes = {
   CAMPAIGNS: '/campaigns',
   CAMPAIGN: '/campaign',
   CREATE_CAMPAIGN: '/create-campaign',
+  EDIT_CAMPAIGN: '/edit-campaign',
   ACCOUNT: '/account',
 };
 

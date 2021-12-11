@@ -64,7 +64,12 @@ export default function Account({ routes }: IProps) {
         );
         const snapshot = await getDocs(campaignQuery);
         const campaignData = snapshot.docs.map(
-          (doc) => ({ ...doc.data(), username: username } as ICampaign),
+          (doc) =>
+            ({
+              ...doc.data(),
+              username: username,
+              id: doc.id,
+            } as ICampaign),
         );
         setCampaignData(campaignData);
         setIsDataLoading(false);

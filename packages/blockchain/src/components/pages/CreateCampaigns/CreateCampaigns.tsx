@@ -1,6 +1,7 @@
+import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { Redirect, useHistory } from 'react-router';
 
 import Button from '../../ui/Button/Button';
 import ErrorBanner from '../../ui/ErrorBanner/ErrorBanner';
@@ -16,7 +17,6 @@ import web3 from '../../../utils/web3';
 
 import classes from './createCampaigns.module.css';
 import sharedClasses from '../../../common.module.css';
-import { getAuth } from '@firebase/auth';
 
 interface IProps {
   routes: IRoutes;
@@ -35,9 +35,21 @@ export default function CreateCampaigns({ routes }: IProps) {
   const [goalError, setGoalError] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const history = useHistory();
 
-  const validate = async () => {
+  const firebaseApp = getFirebaseApp()!;
+  const firestore = getFirestore(firebaseApp);
+  const auth = getAuth(firebaseApp);
+
+  // workaround for redirecting to unauthenticated users
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldRedirect(!auth.currentUser);
+    }, 1000);
+  }, []);
+
+  const validate = () => {
     setError('');
     setNameError('');
     setMinContributionError('');
@@ -79,20 +91,14 @@ export default function CreateCampaigns({ routes }: IProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!(await validate())) {
+    if (!validate()) {
       return;
     }
     setIsLoading(true);
-    const firebaseApp = getFirebaseApp()!;
-    const firestore = getFirestore(firebaseApp);
-    const auth = getAuth(firebaseApp);
     let campaignAddress: string;
     try {
       if (!web3) {
         throw new Error('Web3 Provider Error');
-      }
-      if (!auth.currentUser) {
-        throw new Error('Please Log in to create a campaign');
       }
       let account: string;
       try {
@@ -120,7 +126,7 @@ export default function CreateCampaigns({ routes }: IProps) {
         goal: +goal,
         currentAmount: 0,
         isoTime: new Date().toISOString(),
-        uid: auth.currentUser.uid,
+        uid: auth.currentUser!.uid,
       };
       await setDoc(doc(firestore, 'campaigns', campaignAddress), data);
     } catch (error) {
@@ -132,6 +138,10 @@ export default function CreateCampaigns({ routes }: IProps) {
     setIsLoading(false);
     history.push(routes.CAMPAIGNS);
   };
+
+  if (shouldRedirect) {
+    return <Redirect to={routes.SIGN_IN} />;
+  }
 
   return (
     <Layout faqLink={routes.FAQ}>

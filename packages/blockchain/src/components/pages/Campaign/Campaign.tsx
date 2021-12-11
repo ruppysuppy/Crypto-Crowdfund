@@ -121,9 +121,12 @@ export default function Campaign({ routes }: IProps) {
         </Link>
         {auth.currentUser?.uid === campaignData.uid && (
           <div className={classes.buttonHolder}>
-            <button className={`${classes.editButton} ${sharedClasses.h3}`}>
+            <a
+              href={`${routes.EDIT_CAMPAIGN}?id=${campaignData.id}`}
+              className={`${classes.editButton} ${sharedClasses.h3}`}
+            >
               <i className="fas fa-edit" />
-            </button>
+            </a>
           </div>
         )}
       </div>
