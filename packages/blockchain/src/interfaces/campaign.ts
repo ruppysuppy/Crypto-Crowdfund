@@ -10,6 +10,7 @@ interface ICampaignCompleteData extends ICampaign {
   minimumContribution: string;
   requestCount: number;
   contributorsCount: number;
+  requests: IRequest[];
 }
 
 interface ICampaignServerData {
@@ -22,4 +23,12 @@ interface ICampaignServerData {
   uid: string;
 }
 
-export { ICampaign, ICampaignCompleteData, ICampaignServerData };
+interface IRequest {
+  recipient: string;
+  purpose: string;
+  amount: number;
+  votes?: number;
+  completed?: boolean;
+}
+
+export { ICampaign, ICampaignCompleteData, ICampaignServerData, IRequest };

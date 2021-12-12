@@ -26,9 +26,7 @@ export default function Layout({
           sidebar
         ) : (
           <>
-            <h2 className={sharedClasses.h2}>
-              <strong> Warning </strong>
-            </h2>
+            <h2 className={sharedClasses.h2}>Warning</h2>
             <p className={sharedClasses.p}>
               All actions modifying the BlockChain incurs the use of gas, which
               costs a small amount of Ether & require around 15 seconds to

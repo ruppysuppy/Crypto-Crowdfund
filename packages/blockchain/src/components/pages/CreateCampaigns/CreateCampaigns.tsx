@@ -129,6 +129,9 @@ export default function CreateCampaigns({ routes }: IProps) {
         uid: auth.currentUser!.uid,
       };
       await setDoc(doc(firestore, 'campaigns', campaignAddress), data);
+      await setDoc(doc(firestore, 'requests', campaignAddress), {
+        requests: [],
+      });
     } catch (error) {
       // @ts-ignore
       setError(error.code);

@@ -66,10 +66,13 @@
 
 .textInfo {
   margin-top: calc(var(--spacing) * 4);
-  color: var(--color-primary-light);
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-column-gap: calc(var(--spacing) * 2);
+}
+
+.textInfo span {
+  color: var(--color-primary-light);
 }
 
 .gridContainer {
@@ -84,9 +87,38 @@
   margin-top: calc(var(--spacing) * 4);
 }
 
+.requestsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.contributeGrid {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-column-gap: calc(var(--spacing) * 4);
+}
+
+.contributeGrid div {
+  width: 100%;
+}
+
+.contributeGrid span {
+  display: inline-block;
+  margin-top: calc(var(--spacing) * 4.5);
+}
+
+.createRequestButtonHolder {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: calc(var(--spacing) * 2);
+}
+
 @media screen and (min-width: 568px) {
   .coverImgHolder {
     height: calc(var(--spacing) * 56);
+    margin-top: calc(var(--spacing) * 6);
+  }
+  .contributeGrid span {
     margin-top: calc(var(--spacing) * 6);
   }
 }
@@ -108,6 +140,9 @@
   .gridContainer,
   .description {
     margin-top: calc(var(--spacing) * 6);
+  }
+  .contributeGrid span {
+    margin-top: calc(var(--spacing) * 6.5);
   }
 }
 
