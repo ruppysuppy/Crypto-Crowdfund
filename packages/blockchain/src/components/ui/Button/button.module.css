@@ -27,6 +27,13 @@
   background-color: transparent;
 }
 
+.root:disabled {
+  color: var(--color-secondary) !important;
+  border: 1px solid var(--color-secondary) !important;
+  background-color: transparent !important;
+  cursor: not-allowed;
+}
+
 .fullWidth {
   width: 100%;
 }

@@ -41,6 +41,8 @@ export default function Campaign({ routes }: IProps) {
   const [isInteractionLoading, setIsInteractionLoading] = useState(false);
   const [isContributor, setIsContributor] = useState(false);
   const [isManager, setIsManager] = useState(false);
+  const [approvals, setApprovals] = useState<boolean[]>([]);
+  const [approvalErrors, setApprovalErrors] = useState<string[]>([]);
   const [contribution, setContribution] = useState('');
   const [contributionError, setContributionError] = useState('');
   const [interactionError, setInteractionError] = useState('');
@@ -104,6 +106,16 @@ export default function Campaign({ routes }: IProps) {
             completed: blockchainRequest.complete as boolean,
           };
         });
+        const approvalsPromise = requests.map(async (_, index) => {
+          const isApprover: boolean = account
+            ? (await campaign.methods.isContributor(account).call())
+              ? await campaign.methods.isApprover(account, index).call()
+              : false
+            : false;
+          return isApprover;
+        });
+        setApprovalErrors(approvalsPromise.map(() => ''));
+        setApprovals(await Promise.all(approvalsPromise));
         setCampaignData({
           ...campaignData,
           username: user.username,
@@ -184,6 +196,98 @@ export default function Campaign({ routes }: IProps) {
       ...campaignData!,
       requests: [...campaignData!.requests, request],
     });
+  };
+
+  const handleApprove = async (index: number) => {
+    setIsInteractionLoading(true);
+    setApprovalErrors([
+      ...interactionError.slice(0, index),
+      '',
+      ...interactionError.slice(index + 1),
+    ]);
+    try {
+      const campaign = getCampaign(campaignData!.id);
+      const [account] = await web3.eth.getAccounts();
+      const isValid =
+        (await campaign.methods.isContributor(account).call()) &&
+        !(await campaign.methods.isApprover(account, index).call());
+      if (!isValid) {
+        setApprovalErrors([
+          ...approvalErrors.slice(0, index),
+          'Make sure you are logged into the correct MetaMask account',
+          ...approvalErrors.slice(index + 1),
+        ]);
+        return;
+      }
+      await campaign.methods.approveRequest(index).send({
+        from: account,
+      });
+      setCampaignData({
+        ...campaignData!,
+        requests: campaignData!.requests.map((request, i) => {
+          if (i === index) {
+            return {
+              ...request,
+              votes: request.votes ? request.votes + 1 : 1,
+            };
+          }
+          return request;
+        }),
+      });
+      setApprovals([
+        ...approvals.slice(0, index),
+        true,
+        ...approvals.slice(index + 1),
+      ]);
+    } catch (error) {
+      // @ts-ignore
+      setInteractionError(error.message);
+    }
+    setIsInteractionLoading(false);
+  };
+
+  const handleFinalize = async (index: number) => {
+    setIsInteractionLoading(true);
+    setApprovalErrors([
+      ...interactionError.slice(0, index),
+      '',
+      ...interactionError.slice(index + 1),
+    ]);
+    try {
+      const campaign = getCampaign(campaignData!.id);
+      const [account] = await web3.eth.getAccounts();
+      const isValid = account === (await campaign.methods.manager().call());
+      if (!isValid) {
+        setApprovalErrors([
+          ...approvalErrors.slice(0, index),
+          'Make sure you are logged into the correct MetaMask account',
+          ...approvalErrors.slice(index + 1),
+        ]);
+        return;
+      }
+      await campaign.methods.finalizeRequest(index).send({
+        from: account,
+      });
+      setCampaignData({
+        ...campaignData!,
+        balance: (
+          +campaignData!.balance - campaignData!.requests[index].amount
+        ).toString(),
+        requests: campaignData!.requests.map((request, i) => {
+          if (i === index) {
+            return {
+              ...request,
+              completed: true,
+            };
+          }
+          return request;
+        }),
+      });
+    } catch (error) {
+      // @ts-ignore
+      setInteractionError(error.message);
+    }
+    setIsInteractionLoading(false);
   };
 
   const topSection = campaignData && (
@@ -277,59 +381,6 @@ export default function Campaign({ routes }: IProps) {
       <></>
     ) : (
       <>
-        <>
-          <h2 className={sharedClasses.h2}>Requests</h2>
-          {campaignData!.requestCount === 0 && (
-            <p
-              className={sharedClasses.p}
-              style={{
-                marginBottom: '0',
-              }}
-            >
-              No requests yet
-            </p>
-          )}
-          {isManager && (
-            <CreateRequest
-              balance={+campaignData!.balance}
-              id={campaignData!.id}
-              addRequest={addRequest}
-            />
-          )}
-          <div className={classes.requestsContainer}>
-            {campaignData!.requestCount > 0 &&
-              campaignData!.requests.map((request, index) => (
-                <div className={classes.textInfo} key={index}>
-                  <span>Recipient</span>
-                  {request.recipient}
-                  <span>Purpose</span>
-                  {request.purpose}
-                  <span>Amount</span>
-                  {`${request.amount} Ether`}
-                  {request.votes !== undefined && (
-                    <>
-                      <span>Votes</span>
-                      {request.votes} / {campaignData!.contributorsCount} (
-                      {`${formatNumber(
-                        Math.round(
-                          (request.votes / campaignData!.contributorsCount) *
-                            100,
-                        ),
-                      )}%`}
-                      )
-                    </>
-                  )}
-                  <span>Status</span>
-                  {request.completed
-                    ? 'Completed'
-                    : (request.votes || 0 / campaignData!.contributorsCount) >
-                      0.5
-                    ? 'Ready'
-                    : 'Polling'}
-                </div>
-              ))}
-          </div>
-        </>
         {!isContributor && (
           <>
             <h2 className={sharedClasses.h2}>Contribute</h2>
@@ -373,6 +424,99 @@ export default function Campaign({ routes }: IProps) {
             )}
           </>
         )}
+        <>
+          <h2 className={sharedClasses.h2}>Requests</h2>
+          {campaignData!.requestCount === 0 && (
+            <p
+              className={sharedClasses.p}
+              style={{
+                marginBottom: '0',
+              }}
+            >
+              No requests yet
+            </p>
+          )}
+          {isManager && (
+            <CreateRequest
+              balance={+campaignData!.balance}
+              id={campaignData!.id}
+              addRequest={addRequest}
+            />
+          )}
+          <div className={classes.requestsContainer}>
+            {campaignData!.requestCount > 0 &&
+              campaignData!.requests.map((request, index) => (
+                <React.Fragment key={index}>
+                  <div className={classes.textInfo}>
+                    <span>Recipient</span>
+                    {request.recipient}
+                    <span>Purpose</span>
+                    {request.purpose}
+                    <span>Amount</span>
+                    {`${request.amount} Ether`}
+                    {request.votes !== undefined && !request.completed && (
+                      <>
+                        <span>Votes</span>
+                        {request.votes} / {campaignData!.contributorsCount} (
+                        {`${formatNumber(
+                          Math.round(
+                            (request.votes / campaignData!.contributorsCount) *
+                              100,
+                          ),
+                        )}%`}
+                        )
+                      </>
+                    )}
+                    <span>Status</span>
+                    {request.completed ? (
+                      <span className={classes.complete}>Completed</span>
+                    ) : (request.votes || 0 / campaignData!.contributorsCount) >
+                      0.5 ? (
+                      <span className={classes.ready}>Ready</span>
+                    ) : (
+                      'Polling'
+                    )}
+                  </div>
+                  {approvalErrors[index] && (
+                    <ErrorBanner style={{ marginBottom: 0 }}>
+                      {approvalErrors[index]}
+                    </ErrorBanner>
+                  )}
+                  {isInteractionLoading ? (
+                    <div className={classes.spinnerContainer}>
+                      <Spinner />
+                    </div>
+                  ) : (
+                    <>
+                      {!request.completed && isContributor && (
+                        <Button
+                          className={classes.requestButton}
+                          disabled={approvals[index]}
+                          onClick={() => handleApprove(index)}
+                          fullWidth
+                        >
+                          {approvals[index] ? 'Approved' : 'Approve'}
+                        </Button>
+                      )}
+                      {!request.completed && isManager && (
+                        <Button
+                          className={classes.requestButton}
+                          disabled={
+                            (request.votes ||
+                              0 / campaignData!.contributorsCount) <= 0.5
+                          }
+                          onClick={() => handleFinalize(index)}
+                          fullWidth
+                        >
+                          Finalize
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </React.Fragment>
+              ))}
+          </div>
+        </>
       </>
     );
 
