@@ -1,1 +1,0 @@
-export { appChangedHandler } from './firebase';

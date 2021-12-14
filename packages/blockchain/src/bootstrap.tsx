@@ -8,19 +8,14 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import Web3 from 'web3';
 
 import App from './App';
-import rootReducer from './store/reducers/rootReducer';
 import { setFirebaseApp } from './utils/firebase';
 import { IRoutes } from './interfaces/routes';
 
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
     web3?: Web3;
   }
 }
@@ -77,22 +72,7 @@ const mount = (
     );
   }
 
-  const composeEnhancers =
-    (process.env.NODE_ENV === 'development'
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      : null) || compose;
-
-  const store = createStore(
-    rootReducer,
-    composeEnhancers(applyMiddleware(thunk)),
-  );
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <App history={history} routes={routes} />
-    </Provider>,
-    mountPoint,
-  );
+  ReactDOM.render(<App history={history} routes={routes} />, mountPoint);
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {
