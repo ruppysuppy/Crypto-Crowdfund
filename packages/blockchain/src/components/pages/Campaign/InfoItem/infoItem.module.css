@@ -5,6 +5,7 @@
   background-color: var(--color-paper);
   padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
   border-radius: calc(var(--spacing) * 2);
+  box-sizing: border-box;
 }
 
 .value {

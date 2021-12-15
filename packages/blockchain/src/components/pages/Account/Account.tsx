@@ -20,6 +20,7 @@ import { IUser } from '../../../interfaces/user';
 import { getFirebaseApp } from '../../../utils/firebase';
 
 import classes from './account.module.css';
+import sharedClasses from '../../../common.module.css';
 
 interface IProps {
   routes: IRoutes;
@@ -100,14 +101,20 @@ export default function Account({ routes }: IProps) {
               <div className={classes.spinnerContainer}>
                 <Spinner />
               </div>
+            ) : campaignData.length > 0 ? (
+              campaignData
+                .reverse()
+                .map((campaign) => (
+                  <Campaign
+                    campaign={campaign}
+                    key={campaign.id}
+                    routes={routes}
+                  />
+                ))
             ) : (
-              campaignData.map((campaign) => (
-                <Campaign
-                  campaign={campaign}
-                  key={campaign.id}
-                  routes={routes}
-                />
-              ))
+              <p className={`${classes.spinnerContainer} ${sharedClasses.p}`}>
+                User has no campaigns
+              </p>
             )}
           </>
         )}
