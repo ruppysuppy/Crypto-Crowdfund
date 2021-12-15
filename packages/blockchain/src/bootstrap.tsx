@@ -8,7 +8,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Web3 from 'web3';
 
 import App from './App';
 import { setFirebaseApp } from './utils/firebase';
@@ -16,7 +15,7 @@ import { IRoutes } from './interfaces/routes';
 
 declare global {
   interface Window {
-    web3?: Web3;
+    ethereum?: any;
   }
 }
 
