@@ -89,10 +89,16 @@ export default function Campaigns({ routes }: IProps) {
         </div>
       ) : error ? (
         <ErrorBanner>{error}</ErrorBanner>
+      ) : campaignData.length > 0 ? (
+        campaignData
+          .reverse()
+          .map((campaign) => (
+            <Campaign key={campaign.id} campaign={campaign} routes={routes} />
+          ))
       ) : (
-        campaignData.map((campaign) => (
-          <Campaign key={campaign.id} campaign={campaign} routes={routes} />
-        ))
+        <p className={`${classes.spinnerContainer} ${sharedClasses.p}`}>
+          Launch your first campaign!
+        </p>
       )}
     </Layout>
   );

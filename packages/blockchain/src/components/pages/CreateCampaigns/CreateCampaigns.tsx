@@ -100,10 +100,8 @@ export default function CreateCampaigns({ routes }: IProps) {
       if (!web3) {
         throw new Error('Web3 Provider Error');
       }
-      let account: string;
-      try {
-        [account] = await web3.eth.getAccounts();
-      } catch (error) {
+      const [account] = await web3.eth.getAccounts();
+      if (!account) {
         throw new Error('Please log into MetaMask');
       }
       await CampaignFactory.methods

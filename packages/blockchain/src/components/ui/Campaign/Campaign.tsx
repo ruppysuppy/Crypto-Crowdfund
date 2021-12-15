@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { ICampaign } from '../../../interfaces/campaign';
 import { IRoutes } from '../../../interfaces/routes';
@@ -32,17 +31,17 @@ export default function Campaign({ campaign, routes }: IProps) {
         {campaign.username && (
           <div className={sharedClasses.p}>
             <span>By: </span>
-            <Link
+            <a
               className={sharedClasses.link}
-              to={`${routes.ACCOUNT}?uid=${campaign.uid}`}
+              href={`${routes.ACCOUNT}?uid=${campaign.uid}`}
             >
               {campaign.username}
-            </Link>
+            </a>
           </div>
         )}
       </div>
       <span className={`${sharedClasses.p} ${classes.time}`}>
-        Created: {formatTimeShort(time)}
+        {formatTimeShort(time)}
       </span>
     </div>
   );
