@@ -7,6 +7,7 @@ import { IRequest } from '../../../../interfaces/campaign';
 
 import classes from './request.module.css';
 import rootClasses from '../campaign.module.css';
+import sharedClasses from '../../../../common.module.css';
 import { formatNumber } from '../../../../utils/format';
 
 interface IProps {
@@ -36,7 +37,7 @@ export default function Request({
 }: IProps) {
   return (
     <>
-      <div className={rootClasses.textInfo}>
+      <div className={`${rootClasses.textInfo} ${sharedClasses.p}`}>
         <span>Recipient</span>
         {request.recipient}
         <span>Purpose</span>

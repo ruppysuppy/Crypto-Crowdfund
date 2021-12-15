@@ -68,6 +68,8 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-column-gap: calc(var(--spacing) * 2);
+  max-width: 100%;
+  word-break: break-all;
 }
 
 .textInfo span {

@@ -379,7 +379,9 @@ export default function Campaign({ routes }: IProps) {
   );
 
   const description = campaignData && (
-    <pre className={classes.description}>{campaignData.description}</pre>
+    <pre className={`${classes.description} ${sharedClasses.p}`}>
+      {campaignData.description}
+    </pre>
   );
 
   const interaction = isLoading ? (
