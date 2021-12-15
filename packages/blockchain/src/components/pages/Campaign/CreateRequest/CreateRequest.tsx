@@ -10,7 +10,7 @@ import { getCampaign } from '../../../../utils/campaign';
 import { getFirebaseApp } from '../../../../utils/firebase';
 import web3 from '../../../../utils/web3';
 
-import classes from '../campaign.module.css';
+import classes from './createRequest.module.css';
 
 interface IProps {
   id: string;
@@ -63,6 +63,9 @@ export default function CreateRequest({ balance, id, addRequest }: IProps) {
     setIsLoading(true);
     try {
       const [account] = await web3.eth.getAccounts();
+      if (!account) {
+        throw new Error('Please login to MetaMask');
+      }
       const campaign = getCampaign(id);
       await campaign.methods
         .createRequest(web3.utils.toWei(amount, 'ether'), recipient)

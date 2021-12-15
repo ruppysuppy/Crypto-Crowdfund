@@ -8,14 +8,12 @@ import {
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 
-import Button from '../../ui/Button/Button';
+import Contribute from './Contribute/Contribute';
 import CreateRequest from './CreateRequest/CreateRequest';
-import ErrorBanner from '../../ui/ErrorBanner/ErrorBanner';
 import InfoItem from './InfoItem/InfoItem';
-import Input from '../../ui/Input/Input';
 import Layout from '../../hoc/Layout';
+import Request from './Request/Request';
 import Spinner from '../../ui/Spinner/Spinner';
 import {
   ICampaign,
@@ -164,6 +162,9 @@ export default function Campaign({ routes }: IProps) {
     setIsInteractionLoading(true);
     try {
       const [account] = await web3.eth.getAccounts();
+      if (!account) {
+        throw new Error('Please log into your MetaMask account');
+      }
       const campaign = getCampaign(campaignData!.id);
       await campaign.methods.contribute().send({
         from: account,
@@ -172,6 +173,8 @@ export default function Campaign({ routes }: IProps) {
     } catch (error) {
       // @ts-ignore
       setInteractionError(error.message);
+      setIsInteractionLoading(false);
+      return;
     }
     try {
       const campaignRef = doc(firestore, 'campaigns', campaignData!.id);
@@ -182,6 +185,8 @@ export default function Campaign({ routes }: IProps) {
       setCampaignData({
         ...campaignData!,
         currentAmount: campaignData!.currentAmount + contributionNum,
+        balance: `${Number(campaignData!.balance) + Number(contribution)}`,
+        contributorsCount: campaignData!.contributorsCount + 1,
       });
       setIsContributor(true);
     } catch (error) {
@@ -192,10 +197,11 @@ export default function Campaign({ routes }: IProps) {
   };
 
   const addRequest = (request: IRequest) => {
-    setCampaignData({
+    setCampaignData((campaignData) => ({
       ...campaignData!,
       requests: [...campaignData!.requests, request],
-    });
+      requestCount: campaignData!.requestCount + 1,
+    }));
   };
 
   const handleApprove = async (index: number) => {
@@ -313,12 +319,12 @@ export default function Campaign({ routes }: IProps) {
             </h4>
           )}
         </div>
-        <Link
-          to={`${routes.ACCOUNT}?uid=${campaignData.uid}`}
+        <a
           className={`${sharedClasses.h4} ${sharedClasses.link}`}
+          href={`${routes.ACCOUNT}?uid=${campaignData.uid}`}
         >
           {campaignData.username!}
-        </Link>
+        </a>
         {auth.currentUser?.uid === campaignData.uid && (
           <div className={classes.buttonHolder}>
             <a
@@ -376,149 +382,67 @@ export default function Campaign({ routes }: IProps) {
     <pre className={classes.description}>{campaignData.description}</pre>
   );
 
-  const interaction =
-    isLoading || !auth.currentUser ? (
-      <></>
-    ) : (
+  const interaction = isLoading ? (
+    <></>
+  ) : !auth.currentUser ? (
+    <div className={`${classes.textInfo} ${sharedClasses.p}`}>
+      <span>Login to contribute and view the requests</span>
+    </div>
+  ) : (
+    <>
+      {!isContributor && (
+        <Contribute
+          contribution={contribution}
+          contributionError={contributionError}
+          error={interactionError}
+          isLoading={isInteractionLoading}
+          minimumContribution={campaignData!.minimumContribution}
+          handleContribute={handleContribute}
+          setContribution={setContribution}
+        />
+      )}
       <>
-        {!isContributor && (
-          <>
-            <h2 className={sharedClasses.h2}>Contribute</h2>
-            <div className={classes.contributeGrid}>
-              <div>
-                <Input
-                  type="number"
-                  placeholder="Contribution Amount"
-                  step={campaignData!.minimumContribution}
-                  value={contribution}
-                  onChange={(e) => setContribution(e.target.value)}
-                  error={!!contributionError}
-                  helperText={contributionError}
-                  fullwidth
-                />
-              </div>
-              <span>ETHER</span>
-            </div>
-            {interactionError && (
-              <ErrorBanner
-                style={{
-                  marginTop: '0',
-                }}
-              >
-                {interactionError}
-              </ErrorBanner>
-            )}
-            {isInteractionLoading ? (
-              <div
-                className={classes.spinnerContainer}
-                style={{
-                  marginTop: '0',
-                }}
-              >
-                <Spinner />
-              </div>
-            ) : (
-              <Button onClick={handleContribute} fullWidth>
-                Contribute
-              </Button>
-            )}
-          </>
+        <h2 className={sharedClasses.h2}>Requests</h2>
+        {campaignData!.requestCount === 0 && (
+          <p
+            className={sharedClasses.p}
+            style={{
+              marginBottom: '0',
+            }}
+          >
+            No requests yet
+          </p>
         )}
-        <>
-          <h2 className={sharedClasses.h2}>Requests</h2>
-          {campaignData!.requestCount === 0 && (
-            <p
-              className={sharedClasses.p}
-              style={{
-                marginBottom: '0',
-              }}
-            >
-              No requests yet
-            </p>
-          )}
-          {isManager && (
-            <CreateRequest
-              balance={+campaignData!.balance}
-              id={campaignData!.id}
-              addRequest={addRequest}
-            />
-          )}
-          <div className={classes.requestsContainer}>
-            {campaignData!.requestCount > 0 &&
-              campaignData!.requests.map((request, index) => (
-                <React.Fragment key={index}>
-                  <div className={classes.textInfo}>
-                    <span>Recipient</span>
-                    {request.recipient}
-                    <span>Purpose</span>
-                    {request.purpose}
-                    <span>Amount</span>
-                    {`${request.amount} Ether`}
-                    {request.votes !== undefined && !request.completed && (
-                      <>
-                        <span>Votes</span>
-                        {request.votes} / {campaignData!.contributorsCount} (
-                        {`${formatNumber(
-                          Math.round(
-                            (request.votes / campaignData!.contributorsCount) *
-                              100,
-                          ),
-                        )}%`}
-                        )
-                      </>
-                    )}
-                    <span>Status</span>
-                    {request.completed ? (
-                      <span className={classes.complete}>Completed</span>
-                    ) : (request.votes || 0 / campaignData!.contributorsCount) >
-                      0.5 ? (
-                      <span className={classes.ready}>Ready</span>
-                    ) : (
-                      'Polling'
-                    )}
-                  </div>
-                  {approvalErrors[index] && (
-                    <ErrorBanner style={{ marginBottom: 0 }}>
-                      {approvalErrors[index]}
-                    </ErrorBanner>
-                  )}
-                  {isInteractionLoading ? (
-                    <div className={classes.spinnerContainer}>
-                      <Spinner />
-                    </div>
-                  ) : (
-                    <>
-                      {!request.completed && isContributor && (
-                        <Button
-                          className={classes.requestButton}
-                          disabled={approvals[index]}
-                          onClick={() => handleApprove(index)}
-                          fullWidth
-                        >
-                          {approvals[index] ? 'Approved' : 'Approve'}
-                        </Button>
-                      )}
-                      {!request.completed && isManager && (
-                        <Button
-                          className={classes.requestButton}
-                          disabled={
-                            (request.votes ||
-                              0 / campaignData!.contributorsCount) <= 0.5
-                          }
-                          onClick={() => handleFinalize(index)}
-                          fullWidth
-                        >
-                          Finalize
-                        </Button>
-                      )}
-                    </>
-                  )}
-                </React.Fragment>
-              ))}
-          </div>
-        </>
+        {isManager && (
+          <CreateRequest
+            balance={+campaignData!.balance}
+            id={campaignData!.id}
+            addRequest={addRequest}
+          />
+        )}
+        <div className={classes.requestsContainer}>
+          {campaignData!.requestCount > 0 &&
+            campaignData!.requests
+              .map((request, index) => (
+                <Request
+                  approvalError={approvalErrors[index]}
+                  approved={approvals[index]}
+                  contributorsCount={campaignData!.contributorsCount}
+                  request={request}
+                  index={index}
+                  isContributor={isContributor}
+                  isLoading={isInteractionLoading}
+                  isManager={isManager}
+                  handleApprove={handleApprove}
+                  handleFinalize={handleFinalize}
+                  key={index}
+                />
+              ))
+              .reverse()}
+        </div>
       </>
-    );
+    </>
+  );
 
   return (
     <Layout faqLink={routes.FAQ} sidebarAddition={interaction}>

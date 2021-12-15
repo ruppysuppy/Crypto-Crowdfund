@@ -1,0 +1,32 @@
+.contributeGrid {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-column-gap: calc(var(--spacing) * 4);
+}
+
+.contributeGrid div {
+  width: 100%;
+}
+
+.contributeGrid span {
+  display: inline-block;
+  margin-top: calc(var(--spacing) * 4.5);
+}
+
+.createRequestButtonHolder {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: calc(var(--spacing) * 2);
+}
+
+@media screen and (min-width: 568px) {
+  .contributeGrid span {
+    margin-top: calc(var(--spacing) * 6);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .contributeGrid span {
+    margin-top: calc(var(--spacing) * 6.5);
+  }
+}

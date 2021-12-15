@@ -74,14 +74,6 @@
   color: var(--color-primary-light);
 }
 
-.textInfo .ready {
-  color: var(--color-blue);
-}
-
-.textInfo .complete {
-  color: var(--color-success);
-}
-
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr;
@@ -97,27 +89,6 @@
   flex-direction: column;
 }
 
-.contributeGrid {
-  display: grid;
-  grid-template-columns: 1fr max-content;
-  grid-column-gap: calc(var(--spacing) * 4);
-}
-
-.contributeGrid div {
-  width: 100%;
-}
-
-.contributeGrid span {
-  display: inline-block;
-  margin-top: calc(var(--spacing) * 4.5);
-}
-
-.createRequestButtonHolder {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  grid-column-gap: calc(var(--spacing) * 2);
-}
-
 .textInfo,
 .gridContainer,
 .description,
@@ -128,9 +99,6 @@
 @media screen and (min-width: 568px) {
   .coverImgHolder {
     height: calc(var(--spacing) * 56);
-    margin-top: calc(var(--spacing) * 6);
-  }
-  .contributeGrid span {
     margin-top: calc(var(--spacing) * 6);
   }
 }
@@ -153,9 +121,6 @@
   .description,
   .requestButton {
     margin-top: calc(var(--spacing) * 3);
-  }
-  .contributeGrid span {
-    margin-top: calc(var(--spacing) * 6.5);
   }
 }
 

@@ -1,0 +1,7 @@
+.ready {
+  color: var(--color-blue) !important;
+}
+
+.complete {
+  color: var(--color-success) !important;
+}
