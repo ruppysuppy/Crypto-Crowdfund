@@ -1,7 +1,14 @@
 const { merge } = require('webpack-merge');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.config.common');
+const packageJson = require('../package.json');
+const deployedUrls = require('./urls.json');
 
 const prodConfig = {
+  mode: 'production',
+  output: {
+    filename: '[name].[contenthash].js',
+  },
   module: {
     rules: [
       {
@@ -21,6 +28,17 @@ const prodConfig = {
       },
     ],
   },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'container',
+      remotes: {
+        auth: `auth@${deployedUrls.auth}/remoteEntry.js`,
+        marketing: `marketing@${deployedUrls.marketing}/remoteEntry.js`,
+        blockchain: `blockchain@${deployedUrls.blockchain}/remoteEntry.js`,
+      },
+      shared: packageJson.dependencies,
+    }),
+  ],
 };
 
 module.exports = merge(commonConfig, prodConfig);
