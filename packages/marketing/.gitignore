@@ -4,3 +4,11 @@
 # lock files
 yarn.lock
 package-lock.json
+
+# build
+dist
+
+# firebase
+.firebaserc
+firebase.json
+.firebase/

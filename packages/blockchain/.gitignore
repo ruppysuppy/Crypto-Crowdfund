@@ -11,3 +11,11 @@ package-lock.json
 # enviroment files
 .env
 .env.development
+
+# build
+dist
+
+# firebase
+.firebaserc
+firebase.json
+.firebase/

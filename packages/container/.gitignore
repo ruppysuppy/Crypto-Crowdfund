@@ -7,3 +7,14 @@ package-lock.json
 
 # enviroment files
 .env
+
+# deployed urls
+webpack/urls.json
+
+# build
+dist
+
+# firebase
+.firebaserc
+firebase.json
+.firebase/
