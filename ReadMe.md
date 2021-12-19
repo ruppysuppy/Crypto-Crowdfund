@@ -22,8 +22,9 @@ spread the word, they too become part of these independent works.
 **Worried about being Conned by Fake Campaigns?**
 
 **Crypto Crowdfund** brings power to the Investors as well! Backed by the
-razor-edge of **BlockChain** Technology, _only after the majority of the investors
-has approved a Transaction Request, the transaction can be processed_.
+razor-edge security of **BlockChain** Technology, _only after the majority of
+the investors have approved a Transaction Request, the transaction can be
+processed_.
 
 _No more being scammed by Fake Campaigns!_
 
@@ -37,16 +38,45 @@ _No more being scammed by Fake Campaigns!_
 Each sub-application in **Crypto Crowdfund** is developed and run as a separate
 instance. So a bug in one part of the application cannot affect the other parts.
 
+## Firebase Setup
+
+Follow the instructions below to setup **Firebase**
+
+1. Create a **Firebase** project
+2. Add **Authentication** to the project & enable **Email Authentication**
+3. Add **Firestore** to the project & secure the database using these rules:
+
+   ```cpp
+   rules_version = '2';
+   service cloud.firestore {
+      match /databases/{database}/documents {
+         match /campaigns/{campaign} {
+            allow read: if true;
+            allow create: if request.auth != null;
+            allow update: if request.auth != null && request.auth.uid == resource.data.uid;
+         }
+         match /requests/{requestList} {
+            allow read, create: if request.auth != null;
+         }
+         match /users/{user} {
+            allow read, create: if true;
+            allow update: if request.auth != null && request.auth.uid == resource.data.uid;
+         }
+      }
+   }
+   ```
+
 ## Setup
 
 The application uses `yarn` to run.
 
-To setup the **Smart Contract** please check out the steps mentioned in the
+To set up the **Smart Contract** please check out the steps mentioned in the
 [ReadMe under `smart-contract`](./packages/smart-contract/ReadMe.md#Setup).
 To run the **Blockchain Sub-app**,
-[generating all files](./packages/smart-contract/ReadMe.md#Generate-Files) is mandatory
+[generating all files](./packages/smart-contract/ReadMe.md#Generate-Files) is
+mandatory
 
-1. Run the command `yarn` to install all dependecies
+1. Run the command `yarn` to install all dependencies
 2. Add `.env` files at the root of all **Sub-apps** and the **Container** with the
    following data:
 
@@ -102,3 +132,20 @@ To run the **Blockchain Sub-app**,
 application on other networks, please switch to the desired network in the
 [web3.ts](./packages/blockchain/src/utils/web3.ts) and
 [deploy.js](./packages/smart-contract/scripts/deploy.js) files.
+
+## Building the Application
+
+- Build the **Sub-Apps** using `yarn build` (inside each **Sub-Apps** Directory)
+- Deploy all **Sub-Apps** to any provider of choice
+- Create `packages/container/webpack/urls.json` with the deployed urls
+
+  ```json
+  {
+    "auth": "<deployed-auth-subapp-url>",
+    "marketing": "<deployed-marketing-subapp-url>",
+    "blockchain": "<deployed-blockchain-subapp-url>"
+  }
+  ```
+
+- Build the **Container** using `yarn build` (inside the **Container** Directory)
+- Deploy the **Container** to any provider of choice
